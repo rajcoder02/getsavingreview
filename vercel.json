@@ -16,6 +16,10 @@
     {
       "source": "/roofing",
       "destination": "/roofing.html"
+    },
+    {
+      "source": "/gutter",
+      "destination": "/gutter.html"
     }
   ],
   "redirects": [
@@ -37,6 +41,11 @@
     {
       "source": "/bathroom.html",
       "destination": "/bathroom",
+      "permanent": true
+    },
+    {
+      "source": "/gutter.html",
+      "destination": "/gutter",
       "permanent": true
     }
   ]
