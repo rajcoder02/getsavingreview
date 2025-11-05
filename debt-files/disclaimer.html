@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>getsavingsreview</title>
+  <meta name="referrer" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #e8eef5 0%, #d9e4f1 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .alert-badge {
+      background: #dc3545;
+      color: white;
+      padding: 12px 32px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      margin-bottom: 30px;
+      margin-top: 20px;
+      width: 20rem;
+      margin: auto;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section 1 Styles */
+    .hero-section {
+      text-align: center;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-section h1 {
+      font-size: 48px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      color: #1a1a1a;
+    }
+
+    .hero-section p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 800px;
+      height: 350px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cta-button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 18px 48px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-button:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Form Sections */
+    .form-container {
+      background: white;
+      border-radius: 12px;
+      padding: 50px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-container h2 {
+      font-size: 25px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    .form-container .subtitle {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .form-container .subtitle strong {
+      text-decoration: underline;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      margin-bottom: 50px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #007bff;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .question {
+      font-size: 28px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .option-button {
+      background: #ffc107;
+      border: none;
+      padding: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #1a1a1a;
+    }
+
+    .option-button:hover {
+      background: #ffb300;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    }
+
+    /* Congratulations Section */
+    .congrats-section {
+      text-align: center;
+    }
+
+    .congrats-section h2 {
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    .congrats-image {
+      width: 100%;
+      max-width: 560px;
+      height: 280px;
+      border-radius: 8px;
+      margin: 0 auto 60px;
+      overflow: hidden;
+    }
+
+    .congrats-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Loading Spinner - Exact Match */
+    .loading-spinner {
+      width: 80px;
+      height: 80px;
+      border: 3px solid #e8e8e8;
+      border-top: 3px solid #666;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 30px auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      font-size: 18px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .finish-text {
+      font-size: 16px;
+      color: #666;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding-top: 40px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      margin-top: 10px;
+      color: #999;
+    }
+
+    .footer-links a {
+      color: #999;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 32px;
+      }
+
+      .form-container {
+        padding: 30px 20px;
+      }
+
+      .question {
+        font-size: 22px;
+      }
+
+      .option-button {
+        font-size: 18px;
+      }
+
+      .hero-image {
+        height: 200px;
+      }
+
+      .congrats-image {
+        height: 100%;
+      }
+
+      .congrats-image img {
+        border-radius: 1rem;
+      }
+
+      .congrats-section h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .hero-section h1 {
+        font-size: 30px;
+      }
+
+      .alert-badge {
+        padding: 7px 32px;
+        width: 15rem;
+      }
+
+      .hero-section p {
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+
+      /* .finish-text {
+          font-size: 1px;
+        } */
+    }
+  </style>
+
+  <script>
+    !(function () {
+      "use strict";
+      var n = "lp_ref",
+        t = "cpid",
+        e = "lpurl",
+        c = "https://webeasyhit.com",
+        r = "(?<domain>http(?:s?)://[^/])".concat("/cf/click"),
+        a = "(?:(?:/(?<cta>[1-9][0-9])/?)|(?:/))?",
+        i = "^".concat(r).concat(a).concat("(?:$|(\\?.))"),
+        o = 'javascript:window.clickflare.l="(?<original_link>'
+          .concat(r)
+          .concat(a, '("|(\\?[^"]"))).*'),
+        s = function () {
+          return new RegExp(i, "");
+        },
+        u = function () {
+          return new RegExp(o, "");
+        };
+      function l(n) {
+        var t = (function (n) {
+          return n.replace(s(), function (n) {
+            for (var t = [], e = 1; e < arguments.length; e++)
+              t[e - 1] = arguments[e];
+            var r = t[t.length - 1].domain;
+            return n.replace(r, c);
+          });
+        })(n);
+        return 'javascript:window.clickflare.l="'.concat(t, '"; void 0;');
+      }
+      function f(n, t) {
+        if (
+          (t && n && t.apply(document, [n]),
+            /loaded|interactive|complete/.test(document.readyState))
+        )
+          for (var e = 0, c = document.links.length; e < c; e++)
+            if (s().test(document.links[e].href)) {
+              var r = document.links[e];
+              window.clickflare.links_replaced.has(r) ||
+                ((r.href = l(r.href)),
+                  window.clickflare.links_replaced.add(r));
+            }
+      }
+      var d, h, m, p;
+      !(function (r, a) {
+        var i = document.onreadystatechange;
+        window.clickflare ||
+          ((window.clickflare = {
+            listeners: {},
+            customParams: {},
+            links_replaced: new Set(),
+            addEventListener: function (n, t) {
+              var e = this.listeners[n] || [];
+              e.includes(t) || e.push(t), (this.listeners[n] = e);
+            },
+            dispatchEvent: function (n, t) {
+              t && (this.customParams[n] = t),
+                (this.listeners[n] || []).forEach(function (n) {
+                  return n(t);
+                });
+            },
+            push: function (n, t) {
+              t && (this.customParams[n] = t),
+                (this.listeners[n] || []).forEach(function (n) {
+                  return n(t);
+                });
+            },
+          }),
+            (document.onreadystatechange = function (n) {
+              return f(n, i);
+            }),
+            f(null, i),
+            setTimeout(function () {
+              !(function (r, a) {
+                var i,
+                  o = (function (r, a) {
+                    var i = new URL("".concat(c).concat(r)),
+                      o = "{",
+                      s = o + o;
+                    a.startsWith(s) || i.searchParams.set(t, a);
+                    return (
+                      i.searchParams.append(n, document.referrer),
+                      i.searchParams.append(e, location.href),
+                      i.searchParams.append("lpt", document.title),
+                      i.searchParams.append(
+                        "t",
+                        new Date().getTime().toString()
+                      ),
+                      i.toString()
+                    );
+                  })(r, a),
+                  s = document.createElement("script"),
+                  l = document.scripts[0];
+                (s.async = 1),
+                  (s.src = o),
+                  (s.onerror = function () {
+                    !(function () {
+                      for (
+                        var n = function (n, t) {
+                          var e = document.links[n];
+                          u().test(e.href) &&
+                            setTimeout(function () {
+                              e &&
+                                e.setAttribute(
+                                  "href",
+                                  (function (n) {
+                                    var t = n.match(u());
+                                    if (t) {
+                                      var e = (t.groups || {}).original_link;
+                                      return e ? e.slice(0, -1) : n;
+                                    }
+                                    return n;
+                                  })(e.href)
+                                );
+                            });
+                        },
+                        t = 0,
+                        e = document.links.length;
+                        t < e;
+                        t++
+                      )
+                        n(t);
+                    })();
+                  }),
+                  null === (i = l.parentNode) ||
+                  void 0 === i ||
+                  i.insertBefore(s, l);
+              })(r, a);
+            }));
+      })(
+        ""
+          .concat("/cf/tags", "/")
+          .concat(
+            new URL(window.location.href).searchParams.get("cftmid") ||
+            "{{_CONTAINER_ID}}"
+          ),
+        ((m = new URL(window.location.href).searchParams.get(t)),
+          (d = new RegExp("(^| )".concat("cf_cpid", "=([^;]+)"))),
+          (p = ((h = document.cookie.match(d)) && h.pop()) || null),
+          m || p || "{{CAMPAIGN_ID_}}")
+      );
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="__next" data-reactroot="">
+    <div>
+      <div class="container mx-auto px-4 cms_page">
+        <h2 class="font-bold my-2 text-5xl">Disclaimer</h2>
+        <p>
+          <span style="font-weight: 400">Because
+            <!-- -->getsavingsreview.com<!-- -->
+            IS NOT AN INSURANCE PROVIDER, we cannot ultimately decide whether
+            or not you are approved for an insurance policy. The operator of
+            this web site will share the information you provide with
+            participating insurance carriers, advertisers, networks and other
+            partners who may or may not provide you with an insurance policy.
+            Providing your information on this web site does not guarantee
+            that you will be chosen by a l insurance carrier or approved for
+            an insurance policy. We do not act as agents, brokers, or
+            representatives for any of our insurance carriers, and we do not
+            endorse or charge you for any service or product. All information
+            that we collect and share about you is in accordance with our
+            Privacy Policy which we advise you to review before submitting any
+            information using our form.</span>
+        </p>
+        <p>
+          <span style="font-weight: 400">Because each insurance carrier is different and
+            <!-- -->getsavingsreview.com<!-- -->
+            has no control over the rates and fees each insurance carrier
+            charges, we urge you to carefully review the terms associated with
+            the offer before accepting or declining. Please remember that you
+            are never under any obligation to accept an offer from an
+            insurance carrier and you can cancel the entire process at any
+            time at your discretion.
+            <!-- -->getsavingsreview.com<!-- -->
+            cannot be held accountable for any charges or terms presented to
+            you by a insurance carrier, and we are in no way responsible for
+            any agreement between you and a insurance carrier. For details,
+            questions or concerns regarding your insurance policy, please
+            contact your insurance carrier directly. Please note that
+            insurance carrier terms may vary, and insurance carriers may use
+            different criteria to determine whether an applicant is eligible
+            for a policy. Not all who submit a request for an insurance policy
+            will be chosen by a insurance carrier or approved for an insurance
+            policy. If you are not chosen by a insurance carrier in the
+            participating insurance carrier network, your information may be
+            offered to participating third party advertisers and generators
+            for consideration.</span>
+        </p>
+        <p>
+          <span style="font-weight: 400">It is not our policy to perform credit checks on any of our
+            customers. However, some of the insurance carriers in our network
+            might perform a credit check before making their decisions using
+            the three major reporting bureaus like, TransUnion, Experian and
+            Equifax, as well as other alternate sources of consumer
+            information. In the end, your credit rating may be impacted by a
+            particular insurance carrier’s actions. If you do not pay your
+            insurance policy fee by the specified due date, your insurance
+            carrier may choose to report this delinquency to one or more of
+            the major credit bureaus, which could negatively affect your
+            rating.</span>
+        </p>
+        <p>
+          <span style="font-weight: 400">Any of the information that you read on this website may be
+            changed at any time without any prior notice. We can not guarantee
+            that your submitted information will be provided to a insurance
+            carrier or that a insurance carrier will approve you for an
+            insurance policy.</span>
+        </p>
+        <p>
+          <span style="font-weight: 400">Testimonial Disclaimer: These are not actual testimonials, but
+            they are representative of
+            <!-- -->getsavingsreview.com<!-- -->
+            services.</span>
+        </p>
+        <h3><strong>Advertising Disclosures</strong></h3>
+        <p>
+          <span style="font-weight: 400">getsavingsreview.com<!-- -->
+            does not charge you any fees to submit a insurance policy request,
+            be connected with a insurance carrier, or to receive insurance
+            offers or quotes. If you receive a quote or an insurance offer,
+            the insurance carrier with which you may be connected is available
+            to review its terms with you at no cost. It’s possible that the
+            insurance carrier may require a fee to process your formal
+            insurance policy application and/or credit report, but until you
+            agree to pay the insurance carrier any fee(s) or sign any
+            insurance policy agreements, you may shop with
+            <!-- -->getsavingsreview.com<!-- -->
+            at no cost.</span>
+        </p>
+        <p>
+          <span style="font-weight: 400">The offers that you might receive are from companies from which
+            <!-- -->getsavingsreview.com<!-- -->
+            receives compensation. This compensation may impact what offers
+            you receive and how/where products appear on this site (including,
+            for example, the order in which they appear).<!-- -->
+            <!-- -->getsavingsreview.com<!-- -->
+            does not include all insurance carrier available in the
+            marketplace. If you are presented with an offer, carefully review
+            the details before signing.</span>
+        </p>
+        <h3><strong>Marketing Partners</strong></h3>
+        <p>
+          <span style="font-weight: 400">
+            Marketing partners include: EverQuote and </span><a href="https://plist.everquote.com/partners.html"><span
+              style="font-weight: 400">EverQuote&#x27;s
+              marketing partners</span></a><span style="font-weight: 400">, Glass Roots Marketing LLC,
+            SolidQuote LLC, LendMarx LLC,
+            QuinStreet, 21st Century Insurance, 2insure4less, 4th Dimensional
+            Leads, 5 Star Auto Protection, A &amp; E Vehicle Services, A&amp;B
+            Insurance, A&amp;B Insurance and Financial, AA Auto Protect, AAA
+            Insurance Co., AABCO, AARP, ABC Marketing, ABCLeads, Abrazo
+            Health, ABS Healthcare, ABS Insurance, ACA Express, Academic
+            Advising, Acceptance, Access Insurance, AccordantMedia, Accuquote,
+            Acordia, Acquire Health, Acquisition Tech, Acquisition
+            Technologies, Admaric, Admediary, Admiral Life, Adrea Rubin, Adrea
+            Rubin Marketing, Adserv Inc, Advanced Vehicle Protection Center,
+            Advantage Protection, Advantra, Advice &amp; Life, Advocacy
+            Center, Advocate Health, Advocator Group, Adzio LLC, Aegis First,
+            Aegis Security, Aegon US Holding Corp., Aetna, Affiliated Benefits
+            Group, Affiliated Brokers Insurance, Affiniti Financial, LLC,
+            Affinity Health Plan, Affirmative, Affordable Car Cure, Affordable
+            Health Direct, Affordable Life USA, AFLAC, AGA, AgedLeadStore.com,
+            Agent Insider, AgentCubed Marketplace, AgentFranchise, LLC,
+            Agentra Healthcare, Agile Health, AHCP, AHH, AHIA, AHIX, AIA
+            Direct, AIG, AIG Direct, AIO, AIP, AIS, AIU, AIU Insurance, Akila
+            Digital, Aldridge Insurance Group, Alfa Insurance, Aliera
+            Healthcare, All Digital Promotions, All Nation, All Risk, All Web
+            Leads, All Web Leads Company Allied Insurance, Allegiant Group,
+            Alliance &amp; Associates, Alliance 321, Alliance and Associates,
+            Alliance Health, Alliance Insurance, Alliance National Health,
+            Allianz, Allianza, Allied, Allied Coverage, Allied Health, Allied
+            Insurance, Allied Insurance Partners, Allied Vehicle Protection,
+            Allina Health, Allstarz, Allstate, Allstate County Mutual,
+            Allstate Indemnity, Allstate Insurance, ALLWEB, AllWebLeads,
+            Alpine Digital, America Auto Care, America Direct, America&#x27;s
+            Health Advisors, America&#x27;s Health Care Plan, America&#x27;s
+            Insurance, America&#x27;s Trust, Inc., American, American Advisors
+            Corp., American Alliance, American Alliance Insurance, American
+            Auto Club, American Automobile Insurance, American Automotive
+            Alliance, LLC, American Banks, American Benefits Group, American
+            Casualty, American Continental, American Deposit Insurance,
+            American Direct Business Insurance, American Economy, American
+            Empire Insurance, American Family, American Family Insurance,
+            American Family Mutual, American Fidelity Assurance, American
+            Fidelity Corp., American Financial, American Financial Group, LLC,
+            American General, American Health Hub, American Health Plans,
+            American Health Underwriters, American Home Assurance, American
+            Income Life Insurance Company, American Income Life Insurance
+            Company Family, American Insurance, American Insurance Agencies,
+            American Insurance Agencies Direct, American Insurance Agencies
+            Direct Inc., American Insurance Organization, American Insurance
+            Organization, LLC, American International, American International
+            Ins, American International Pacific, American International South,
+            American Life &amp; Health, American Manufacturers, American
+            Mayflower Insurance, American Motorists Insurance, American
+            National Insurance, American National Insurance Co, American
+            National Insurance Company, American National Property and
+            Casualty, American Premier, American Premier Insurance, American
+            Protection Insurance, American Reliable, American Republic,
+            American Republic Insurance Co., American Savers Plan, American
+            Security Insurance Company, American Service Insurance Agency,
+            American Skyline Insurance Company, American Spirit Insurance,
+            American Standard, American Standard Insurance - OH, American
+            Standard Insurance - WI, American Standard Insurance – OH,
+            American Standard Insurance – WI, American States, Americans
+            Choice Health, Americare, Americare Group, Americare/American
+            Enterprise, Americas Health Brokers, Americas Health Group,
+            Americas Trust, Inc., America’s Health Advisors, America’s Health
+            Care Plan, America’s Insurance, America’s Trust, Inc.,
+            AmeriChoice, Americo, Americor, Amerigroup, AmeriHealth,
+            Amerilife, AmeriPlan, Ameriprise, Ameriprise Financial Group,
+            Ameriquote, Amerisure, Ameritas Life, Amica, Amica Insurance,
+            Angelic Marketing Group, Angelic Marketing Group, LLC, ANPAC,
+            Answer Financial, Anthem, Anthem / BCBS, Anthem BCBS, Anthem Blue
+            Cross and Blue Shield, Anthem/BCBS, AON, Aon Corp., Apex
+            Healthcare Advisors, Apex United Corp., API, Apliant, Apollo
+            Group, Apollo Insurance Group, Apollo Interactive, Aragon
+            Advertising, Arbella, Ardent Health Services, Arizona General,
+            Armed Forces Insurance, Artisan Warranty, Assigned Risk,
+            Associated Indemnity, Associated Insurance Managers, Assurance,
+            Assurance IQ, Assurance IQ, Inc., Assurance Life, Assurant,
+            Assurant, Bankers Life and Casualty, Assured Life, Astonish,
+            Astoria Company, Atlanta Casualty, Atlanta Specialty, Atlantic
+            Auto Protection, Atlantic Blue Media, Atlantic Health, Atlantic
+            Indemnity, Atlantis, Atomic Leads, Audience Serv, Austin Mutual,
+            Auto 1 Protection, Auto Care Warranty Solutions, Auto Club
+            Insurance Company, Auto Insurance Guide, Auto Owners, Auto Policy
+            Center, Auto Protection 1, Auto Protection Club, Auto Protection
+            Group, Inc, Auto Protection Plus, Auto Repair Network, Auto Repair
+            Protection Services, Auto Service Center, Auto Service Department,
+            AutoAssure, Autoguard Pro, Automotive Service Protection,
+            Automotive Services Center, Avendia Management, Avenge Digital,
+            Avesis, Aviva, Avmed, AvMed Inc., Avomark, AXA Advisors, AXA
+            Insurance Group, Axis Auto Protection, Badger Mutual,
+            Banker&#x27;s Fidelity, Bankers &amp; Shippers, Bankers Life and
+            Casualty, Banker’s Fidelity, Bankrate, Bankrate Insurance,
+            Bankrate, Inc., Banner Life, Bantam Connect, Bantam Connect LLC,
+            Bargain Hunters, Bartleson Brokers, Bayside, BBRS Group, BCBS,
+            BCBS Georgia, BCBS of Florida, BCBS of Michigan, BCBS Ohio, Beacon
+            Leads, LLC, Beazley Group, Benefit Advisors, Benefit Concepts,
+            Benefit Mall, Benepath, Benepath Health Insurance, Best Agency
+            USA, Best Obamacare, BestQuotes, BGA Insurance, BH Direct, BH
+            Insurance Solutions, LLC, Blip Marketing, Blip Marketing (DBA),
+            Blue Cross, Blue Cross - Anthem, Blue Cross and Blue Shield, Blue
+            Cross and Blue Shield Association, Blue Cross Blue Shield, Blue
+            Cross Blue Shield of Nebraska, Blue Cross of South Carolina, Blue
+            Cross/Blue Shield Association Companies, Blue Ink Digital, Blue
+            Shield of CA, Blue Shield of California, Blue Whale Media, Blue
+            Wing Ads, BlueCross/Blue Shield Association Companies, BMO Corp
+            Inc, BMP Insurance, Bold Media Group, Bolt, Bonneville, Boost,
+            Boost Health Insurance, Boston Old Colony, Bravo Health, Bridge
+            Marketing, Bright Health Plan, Bright Home Energy, Brightway,
+            Brokers Revolution, Brooke Franchise Corporation, Brooke
+            Insurance, Brookstone Financial, BRXTN Digital Media, Btel, Btel
+            Communications, Budget Family Insurance, Builders, c0aster, C3
+            Data LLC, Caitlin Insurance Co., Cal Farm Insurance, California
+            Casualty, California State Automobile Association, Call Blade,
+            Call Center Partnerships, Call Lead Solutions, Call Trader, Call
+            Trader LLC, Call4SeniorSavings.com, Cambia, Camden, CAN,
+            CancerInsurance.com, Candid Maven, CAP Brokerage, INC, Capital
+            Auto Protection, Capital Choice, Capital District Physicians
+            Health Plan, Capital Health Insurance of America, Car Guardian,
+            Carchex, Care Entrée, Career Plan Guide (CPG), CareMore,
+            Caresource, CareZone, Carezone Inc., CareZone Insurance Services,
+            CarGuard Administration, Carle Clinic Association, CarShield,
+            Cascade National Ins, Casualty Assurance, Catholic Financial Life,
+            CDPHP, CDX, Cege, Cege Media, Celtic Insurance, Centene, Centene
+            Corp., Centene Corporation, Centennial, Century Benefits,
+            Certainty Auto Protection, Champion Leads LLC.Finsideinside,
+            Charter Oak, Chase Insurance Group, Cherry Blitz, Chesapeake,
+            Chicago Insurance, Chinese Community Health Plan, Choice Direct,
+            Choice Health Insurance, Choice Insurance, Christian Fidelity,
+            Chubb, Church Mutual, Cigna, Citigroup, Citirex, Citizens,
+            Citizens Disability, Clarendon American Insurance, Clarendon
+            National Insurance, Clean Energy Concepts, Clear Choice Health,
+            Clear Link Insurance Agency, LLC, Clear One, Clearlink, Cloudia
+            Assistant, Cloverleaf, CMG Solutions, CNA Insurance, CO Farm
+            Bureau, Colby Direct, Colonial, Colonial Insurance, Colonial Life
+            &amp; Accident Insurance Company, Colonial Penn, Colorado Bankers,
+            Combined, Commercial Marketing Group, Commercial Union,
+            CommercialInsurance.net, Commonwealth, Communicating for America,
+            Community Care, CommunityCare, Compare Insurance Quotes,
+            Compare.com, CompareInsuranceQuotes, Comparison Market, Complete
+            Auto Care, Connect Insurance Brands, Connect One Health, Connect
+            Rite Bpo, ConnectiCare, Conseco, Conseco Life, Consolidated USA
+            Insurance, Consumer Council, Consumer Protection Services,
+            Consumer United, Contactability, Continental Casualty, Continental
+            Divide Insurance, Continental Insurance, Continental Life,
+            Conventry, Core Home Security, Corner Shop Media, Coto Insurance,
+            Cotton States Insurance, Cottonwood, Countershot Media, Country
+            Companies, Country Financial, Country Insurance and Financial
+            Services, Countrywide Insurance, Coventry, Coventry Health Care,
+            Coverage One, Coverage One Insurance, Coverage One Insurance Group
+            LLC, Coverage One Insurance Group, LLC, Coverage One Insurance
+            Group, LLC., Coverance Insurance Solutions, Inc., Coverdell,
+            CoverHound, Covertech, Covida, Creative Emarketing, Creative
+            Intellects, Creative Intellects, Inc., Credit Union, Criterion,
+            Crosspointe, Crosspointe Insurance, Crosspointe Insurance
+            Advisors, CS Marketing, CSE, CSE Insurance Group, CUNA Mutual
+            Group, CXP Insurance Services, CXP Insurance Services, LLC,
+            Cypress Health Corp., D&amp;M Marketing, Dairyland, Dairyland
+            County Mutual Co of TX, Dairyland Insurance, Dakota Fire, DataLot,
+            DataMax, Datastream Group, LLC, Datwerx, Dealer Services, Dean
+            Health, Deerbrook, Delphi Financial, Delta Auto Protect, Delta
+            Dental, DentalInsurance.com, Department of Service Contracts,
+            Depositors Emcasc, Design Benefit Plans, Desilva Automotive
+            Services, LLC, Diablo Media, Digiline Media, Digital DBA, Digital
+            Market Media, Digital Market Media, Inc, Digital Marketing Group,
+            Digital Media Solutions DBA Forte Media Solutions, Digital Thrive,
+            Digital Thrive, LLC, Direct Auto, Direct General, Direct Impact
+            Leads, Direct Marketing Group, Direct Property &amp; Casualty,
+            Direct Protect Security, Direct STM, Direct Web Advertising,
+            Disability Advisor, Discount Insurance Quotes, Dixie, Dobak
+            Holdings LLC, Doc Auto, Doc Auto Insurance, DoublePositive, Drake
+            Life, DressanderBHC, Drips, Drive Smart Warranty, Driven Auto
+            Protection, LLC, Drivers Protection, LLC, Drobu, DTRIC, E Broker
+            Center, e-Telequote, e-TeleQuote Insurance, e-TeleQuote Insurance,
+            Inc., Eagle Health, eAmerifamily, East Coast Health Insurance,
+            Ebco General, EC Insurance, Economy Fire &amp; Casualty, Economy
+            Preferred, Efinancial, Egis Auto, eHealth, EHealth - JUMBO,
+            eHealth Insurance, eHealth Insurance Services, eHealthInsurance
+            Services, eHealthInsurance Services, Inc., Ehealthinsurance.com,
+            Elderplan, Electric, Electric Insurance, Elephant, Elephant
+            Insurance, Elite Choice Health, Elite Health, Elite National
+            Health Group, eMarketing Media Group, EmblemHealth, EMC, Empire,
+            Empire Consumer Services, Employers Fire, Empower Brokerage,
+            Encompass, Endurance Warranty Services, Energy Alliance,
+            Enginefish, LLC, Enrollment Services Inc., Ensure, Ensurem, Enver
+            Energy Improvements, Enver Solar, EPath, EPIQ, Equita Group,
+            Equita Group Final Expense Services, Equitable Life, Erie
+            Insurance Company, Erie Insurance Exchange, Erie Insurance Group,
+            Erie Insurance Property and Casualty, Esurance, Everest Financial
+            &amp; Insurance Services, Eversurance, Every Choice Insurance,
+            Exact Match Media, Exact Match Media, LLC, Excel Impact, Excel
+            Impact LLC, Excel Impact, LLC, ExcelImpact, LLC, Excelium Group,
+            Excella Benefits, Inc., Excellus, Expert Marketing, Explorer,
+            Extend Health, Extended Asset Protection LLC, EZ Healthcare,
+            Facility, Fallon Community Health Plan, Family First Insurance
+            Advisors, Family First Insurance Advisors LLC, Family Life,
+            Family/Rural, Farm and Ranch, Farm Bureau, Farm Bureau/Farm,
+            Farmers Insurance, Farmers Insurance Exchange, Farmers TX County
+            Mutual, Farmers Union, Farmland, Federal, Federated, Federated
+            American, Federated Group, Fidelis, Fidelity and Guaranty Life,
+            Fidelity Health Group, Fidelity Insurance Company, Fidelity
+            Investments Life, Fidelity Life, Fidelity National, Fidelity
+            Security Life, Field of Leads Ltd., Fields of Leads, Final Expense
+            Direct, finalexpenseassistant.com, FinanceBox.com, Financial
+            Indemnity, Fiorella Insurance, Fiorella Insurance Agency, Fiorella
+            Insurance Agency, Inc., Fire and Casualty Insurance Co of CT,
+            Fireman&#x27;s Fund, Firemans Fund, Fireman’s Fund, First
+            Acceptance Insurance, First American, First American Financial,
+            First Choice Health, First Family Insurance, First Financial,
+            First General, First National, First Option Health, First
+            Preferred Insurance, Fivestrata, FiveStrata.com, FLEX Marketing
+            Group, Flexquote, Flint Maher Financial and Insurance, Florida
+            Blue, Flyhigh, Follow My Lead, Ford Motor Credit, Forefront
+            Insurance, Foremost, Foresters, Forethought, Formula Marketing
+            &amp; Analytics, Formza, Formza, LLC, Fortegra, Fortegra
+            Insurance, Fortegra Insurance Agency, Fortegra Personal Insurance
+            Agency, Fortis, Franklin, Fred Loya Insurance, Freedom health,
+            Freedom National, Freeway Insurance, Fresh Leads, Fresh Leads,
+            Inc., Gainsco, Garrett Laughlin LLC, Gaurantee Trust Life, Geber
+            Life, GEICO, Geico Casualty, Geico General Insurance, Geico
+            Indemnity, Geisinger, Geisinger Insurance, Generation Life,
+            Generation Life Insurance, Genesis Health, Genworth, Genworth
+            Financial, George Kopp Insurance, Gerber, Gerber Insurance
+            Company, Gerber Life, Gerber Life Insurance Company, Get My Life
+            Insured, Get Seen Media, GetAuto, GetInsured, Getinsured.com,
+            GetMeHealthCare.com, GetMeHealthInsurance.com, GHI, GigUp,
+            Globalsky BPO, Globe Life, Globe Life Insurance Company, Globe
+            Life Insurance Company of New York, GMAC Insurance, GMAC/NGIC, Go
+            Direct Lead Generation, Go Direct Lead Generation, LLC, GoDirect
+            Leads Generation, GoHealth - UE Calls, GoHealth Insurance,
+            GoHealth.com, GoHealth/Norvax, GoHealthInsurance.com, Goji, Golden
+            Rule, Golden Rule Insurance, Golden Rule Insurance Co., Golden
+            Rule Insurance Company, GoMedicare, GoMediGap, GotConsumer,
+            GotQuotes, Government Employees, Government Employees Insurance,
+            Government Personnel Mutual Life, Grange, GRE Harleysville H,
+            Great American, Great Way, Great West, GreatAmerican, Green Energy
+            Marketing, Green Home Advantage, Grey Peaks, Grinnell Mutual,
+            Group Health Cooperative, Group Health Incorporated, Guaranteed
+            Benefits, Guaranteed Health, Guaranteed Health Options, Guaranty
+            National, Guaranty National Insurance, Guardian, Guardian Health
+            Group, Guardian Healthcare, Guardian Life, Guide One, Guide One
+            Insurance, Guide To Insure, GuidePointe Solutions, GuideToInsure,
+            Halcyon, Halo Vehicle Protection, Hanover, Hanover Lloyd&#x27;s
+            Insurance Company, Hanover Lloyd’s Insurance Company, HAP Health
+            Alliance, Happy Days, Hartford, Hartford AARP, Hartford Accident
+            and Indemnity, Hartford Casualty Insurance, Hartford Fire &amp;
+            Casualty, Hartford Fire Insurance, Hartford Insurance Co of
+            Illinois, Hartford Insurance Co of the Southeast, Hartford Life,
+            Hartford Omni, Hartford Underwriters Insurance, Harvard
+            Commonwealth Health Plan, Harvard Pilgrim, HasTraffic, Hawaii
+            Medical Service Association, Hawaii Medical Services Association,
+            Hawkeye Security, HCC Insurance holdings, Headquarter Insurance,
+            Health &amp; Life Advantage, Health 1nsurance.com, Health
+            Advisors, Health America, Health and Life Associates, Health and
+            Life Plans of America, Health Benefits Center, Health Benefits
+            Direct, Health Benefits One, Health Care Service Corp., Health
+            Care Solutions, Health Choice One, Health Connection Insurance,
+            Health Corp USA, Health Coverage Fast, Health Dime, Health eDeals,
+            Health Enrollment Center, Health Exchange Agency, Health First
+            Advisors, Health Heritage Advisors, Health I.Q., Health Insurance
+            Advantage, Health Insurance Advisors, Health Insurance Alliance,
+            Health Insurance Alliance, LLC, Health Insurance for Everyone,
+            Health Insurance Innovations, Health Insurance of America, Health
+            Insurance Services, Health Insure For You, Health Markets, Health
+            Net, Health Network, Health Now New York Inc., Health Option One,
+            Health Partners of Philadelphia, Health Partners of Philadelphia
+            Inc., Health Plan One, Health Plan Services, Health Plans 4 Less,
+            Health Plans America, Health Plans of America, Health Plus, Health
+            Plus of America, Health Pocket, Health Reform Team, Health Sherpa,
+            Health Solutions One, Health Solutions Team, Health Trust
+            Financial, Health1nsurance.com, Healthcare Advisors, HealthCare
+            Alternatives, Healthcare Direct, Healthcare Solutions, Healthcare
+            Solutions Team, Healthcare Solutions Team, LLC., HealthCare, Inc.,
+            Healthcare.com, HealthCompare, HealthCompare Insurance Services,
+            Inc., HealtheDeals, Healthedeals.com (“healthy deals”),
+            HealthInsurance.com, HealthInsurance.org, HealthIQ, Healthline
+            Care, HealthMarketers, Healthmarkets, HealthMarkets / Insphere,
+            HealthMarkets Inc., HealthMarkets Insphere, HealthMarkets
+            Insurance Agency, HealthMarkets/Insphere, HealthMatchup,
+            HealthNet, HealthPartners, HealthPlan Advisors, HealthPlan
+            Intermediaries Holdings, LLC, HealthPlan Services,
+            HealthPlanMatchup, HealthPlanOne, HealthPlus of Michigan,
+            HealthPocket, HealthPocket, Inc., HealthQuote of NY,
+            HealthQuoteInfo.com, HealthShare America, HealthShare American,
+            HealthSpan, HealthSpire, HealthSpring, Healthy Halo, Heard and
+            Smith, Henry Ford Health System, Heritage, Heritage Health
+            Advisors, Heritage Health Group, Heritage Life Insurance Company,
+            HHA, HIA, High Quality Vehicle Protection, Highland Health Direct,
+            Highland Health Direct, LLC., Highmark, Highmark BCBS, HII, HII –
+            Starr Insurance, HIIQ, HIP Health Plan, HIP Insurance, Hippo,
+            Hippo Insurance, Hiscox, HK Flavors Limited, Hola Doctor,
+            HolaDoctor, HolaDoctor, Inc., Home Bundles, Home Insurance King,
+            Home Path, Home Savings, Home Security Promotions, Home Services
+            companies, Homeinsurance.com, Homeland Health, Homeland
+            Healthcare, Hometown, Hometown Quotes, Horace Mann, Horizon,
+            Horizon Health Advisors LLC, Horizon Health Insurance, Horizon
+            Media, Inc., Hospital Services Association of NEPA, How to Enroll,
+            HPO, HSK Insurance Solutions, HSO, HST, HST Enrollment Center,
+            Humana, HyperTarget, Hypertarget Marketing, IAB, iCan Benefit,
+            iCan Benefit Group, iCan Benefit Group, LLC, iCan Group, Ideal
+            Concepts, Ideal Concepts, Inc., iDeal Group Inc, iDeal Health
+            Benefits, IDS, IFA Auto Insurance, IFA Insurance Company, IGF
+            Ins., IGF Insurance, IHC, IHC Group, IHC Health Plans, IHC
+            Specialty Benefits, Inc., IIS Insurance, iLife and Health, IMO,
+            Inavision, Independence American Insurance Company, Independence
+            Blue Cross, Independent Carriers, Independent Health Association,
+            Individual Health Quotes, INDS, Infinity Insurance, Infinity
+            National Insurance, Infinity Select Insurance, Infinix, Infinix
+            Media, Infinix Media, LLC, ING, ING US Life, Innovation Direct
+            Group, Innovation Group of South Florida, Innovative Benefit
+            Concepts, Inquire Media, Ins-leads.com, Inside Response, Inside
+            Response, LLC, Insphere, Insphere Insurance Solutions, Insur. of
+            Evanston, InsuraMatch, Insurance Care Direct, Insurance Central,
+            Insurance Depot of America, Insurance Express, Insurance Health
+            Hotline, Insurance Insight, Insurance Line One, Insurance
+            Management Associates, Insurance Medics, Insurance Services,
+            Insurance Solutions Direct, Insurance.com, InsuranceCareDirect,
+            InsuranceLeads.com, InsuranceOnly, InsuranceProz, Insurancequotes,
+            InsuranceQuotes, Inc., insuranceQuotes.com, Insure Me Health,
+            Insure.com, Insurealife, Insured Street, InsureMe, Insurify,
+            Insurzy, Insweb, Integon, Integrate, Integrated Benefits,
+            Integrity Vehicle Group, Integrity Vehicle Services, Intelecare
+            Inc, IntelliQuote, intentlogic, Inter Valley Health Plan,
+            Interstate, Investors Life, IPA Agents, IPA Direct, IPA Family,
+            iPlan Health Group, iPolicyQuote, iQuoteX, iVolve Health,
+            iWebQuotes, Jackson National Life, Jangl, JCG New Media, JLS, John
+            Deere, John Hancock, Johnny Watts Agency, JRC Insurance Group,
+            Kaiser, Kaiser Foundation Health Plan, Kaiser Permanente, Kaiser,
+            Medicare Solutions, Kaleida Health, Kallstar, Kanopy, Kanopy
+            Insurance, Kateway Consulting, Kauffman Insurance Group, Keenan
+            Associates, Kelly Klee Private Insurance, Kelsey-Seybold, Kemper,
+            Kemper Lloyds Insurance, Kentucky Central, Key insurance Advisors,
+            Keystone, Kin, Kind Health, Kind Insurance Inc., Knights of
+            Columbus, Koenig Quotes, Komparison, L.A. Care Health Plan, Ladder
+            Life, Landmark American Insurance, Lands Health, LBCOT Insurance,
+            LCN, Lead Emblem, LLC, Lead Foundations, Lead Origins, LeadAmp,
+            LeadCloud, LeadCloud, LLC, Leadco, LeadEnvoy, Leader General,
+            Leader Insurance, Leader National, Leader National Insurance,
+            Leader Preferred Insurance, Leader Specialty Insurance,
+            Leadnomics, Leadsrow, League General, LeClair Insurance, Legacy
+            Benefits Services, Legal &amp; General America, Level One Health
+            Group, Liberty Automobile Protection, Liberty Bell Auto, Liberty
+            Health Plan, Liberty Health Professionals, Liberty Health
+            Solutions, Liberty Insurance Corp, Liberty Mutual, Liberty Mutual
+            Fire Insurance, Liberty Mutual Insurance, Liberty Mutual Insurance
+            Company, Liberty National, Liberty National Life Insurance
+            Company, Liberty Northwest, Liberty Northwest Insurance, Life
+            Quotes, Inc., LifeInsuranceMatchup, LifeLine Direct, Lifeline
+            Direct Insurance, Inc, LifeQuotes, LifeSecure, Lifetime
+            Healthcare, LifeWise Health Plan, LifeWise Health Plan of Oregon,
+            Lighthouse Insurance, Lighthouse Insurance Group, Lighthouse
+            Insurance Group LLC, LightHouse Insurance Health, Lincoln Benefit
+            Life, Lincoln National, Line East Leads, Link Interactive,
+            ListenClear, Liz Byrne USHA, LLC, LLicensed Insurance Advisors,
+            Lockton Affinity Group, Longevity Alliance, Loud Cloud Nine / LCN,
+            Louisiana Health Services, Loyal American, LS Lead Generation, LTC
+            Financial Partners, Lumbermens Mutual, M Plan Inc., Madera
+            Digital, LLC, Madison National Life Insurance Company, Managed
+            Health Inc., MAPFRE, Marathon, Marchex, Markel American, Martin
+            Insurance, Martin Insurance Group, Martin&#x27;s Point, Martin’s
+            Point, Maryland Casualty, Mass Mutual, Mass Nexus, Massachusetts
+            Mutual, MassNexus, Match Media Group, Match Media Group, LLC,
+            Matrix Direct, Matrix Warranty Solutions, Maxim Strategies,
+            Maxxlocal, Me!Box Media, MedGapDirect, Media Alpha, Media Alpha
+            Exchange, Media Champs, Media Mix 365, MediaAlpha, MediaStratX,
+            Mediastratx, LLC, Medica, Medical Card System Inc., Medical Mutual
+            of Ohio, Medicare Enroller, Medicare Health Benefits, Medicare
+            Plan Finder, Medicare Providers, Medicare Solutions, Medicare
+            Trusted Solutions, LLC, MedicareAdvantage.com, Medicareplan.com,
+            MedicareProz, Medigap360, MEGA Life and Health, MEGA Life and
+            Health Insurance, Mega/Midwest, Mendota, Merastar, Mercury, Mercy,
+            Metlife, MetLife Auto and Home, MetLife Insurance, Metropolitan
+            Co., Metropolitan Insurance Co., MG Insurance, Mid Century
+            Insurance, Mid-Continent Casualty, Mid-West Ntl. Life, Middlesex
+            Insurance, Midland National, Midland National Life, Midwest
+            Mutual, Midwest Repair Defense, Migo Insure, Mikayla Data,
+            Millbank, Millers Mutual, Milwaukee General, Milwaukee Guardian,
+            Milwaukee Mutual, Minnehoma, Minnesota Mutual, Mississippi
+            Insurance, Missouri General, MJ Direct, MMI Group, MMM Healthcare
+            Inc., Modern Health, Modern Health, LLC, Modern Woodmen of
+            America, Molina, Molina Healthcare, Molina Healthcare Inc.,
+            Momentum Marketing Services Solutions, Mony Group, Mortgage
+            Protection Bureau, Moss, Moss Affiliate, Moss Affiliate Marketing,
+            Motor Vehicle Assurance, Motors, Mountain Financial, Mountain
+            Laurel, Mutual Insurance, Mutual Of Enumclaw, Mutual of New York,
+            Mutual of Omaha, MVA Warranty, MVP, My Agent Solution, LLC, My
+            Best Health Plan, My Insurance Solutions, MyHealthAngel.com,
+            MyInsuranceExpert, MyRetiree Health, NAFS, Name My Premium,
+            Nat&#x27;l Farmers Union, Natcap Inc, Nation Health Advisors,
+            National Alliance, National Auto Protection Corp., National Ben
+            Franklin Insurance, National Better Living Association, National
+            Brokerage, National Brokers of America, National Casualty,
+            National Colonial, National Continental, National Continental
+            Insurance, National Coverage Center, National Disability, National
+            Family, National Family Assurance Group, Inc., National Fire
+            Insurance Company of Hartford, National General Insurance,
+            National General Insurance Company, National Health Connect LLC,
+            National Health Connect, LLC, National Health Hub, National Health
+            Hub LLC, National Health Insurance, National Health Plans,
+            National Health Plans dba Your Lowest Quote, National Health Plans
+            LLC, National Health Solutions, National Healthcare Advisors,
+            National Income Life Insurance Company, National Indemnity,
+            National Insurance, National Merit, National Repair Solutions,
+            National Surety Corp, National Union Fire Insurance, National
+            Union Fire Insurance of LA, National Union Fire Insurance of PA,
+            National Vehicle Protection Services, Inc., Nations Auto
+            Protection, Nations Health Group, Nations Health Group Guide One
+            Insurance, Nations Insurance Solutions, Nationwide, Nationwide
+            General Insurance, Nationwide Health Advisors, Nationwide
+            Insurance Company, Nationwide Mutual Fire Insurance, Nationwide
+            Mutual Insurance, Nationwide Property and Casualty, Navy Mutual
+            Aid Association, NCWC, Inc., Need Health, needHEALTH, Neighborhood
+            Health Plan Inc., Neilson Financial Services, Neo Ogilvy, Net
+            Health Affilates Inc., Net Health Affiliates Inc., NetQuote,
+            Network Media Tank, New Career, New England Financial, New Era,
+            New York Life, New York Life Insurance, NewQuest, Next Gen, Next
+            Level Benefits Incorporated, Next Wave Marketing, Next Wave
+            Marketing Strategies, Inc, NextGen, NextGen Leads, NextGen Leads,
+            LLC, Nexus Corporation, Nexus Enterprise Solutions, NGIC, NHA, NMP
+            Insurance Services, LLC / NameMyPremium, Noridian Mutual Insurance
+            Company, North American, North Pacific, North Pointe, North Shore,
+            Northern Capital, Northern States, Northland, Northwest Medical,
+            Northwest Pacific, Northwestern, Northwestern Mutual, Northwestern
+            Mutual Life, Northwestern Pacific Indemnity, Norvax, Norvax, LLC.,
+            NuHealth, Number One Health, Number One Health Insurance Agency
+            Inc., NuStar Insurance, Offer Advisors, Offer Strategy, Offerweb,
+            Ohio Casualty, Ohio National Life, Ohio Security, Old Mutual US
+            Life, Olympia, Omaha, Omega Auto Care, Omni Indemnity, Omni
+            Insurance, Omni Research, Oncor Direct, ONCOR Insurance Services,
+            One Source Warranty, One Touch Direct, Online Digital LLC, Onviant
+            Insurance Agency Inc, Onviant, LLC, Onyx Digital Media, Open
+            Market Quotes, Optimum HealthCare, Oregon Mutual, Orion Ins.,
+            Orion Insurance, Oscar, OSCAR Health, Oscar Health Insurance, Ox
+            Car Care, Oxford, Oxford Health Plans, Oxford Insurance, Oxford
+            Marketing Partners, Oxford Marketing Partners, LLC, Pacific
+            Benefits Group, Pacific Benefits Group Northwest, Pacific
+            Indemnity, Pacific Insurance, Pacific Life, Pacific Life and
+            Annuity, PacifiCare, Pafco, Pafco General Insurance, Page One
+            Projects, Palmer Administrative Services, Inc, Palmetto Senior
+            Solutions, Palms Health Group, Paloverde, Parasol Agent Network,
+            Parasol Agents Network, Parasol Leads, Parasol Leads, Inc.,
+            Patriot General, Patriot General Insurance, Pay Per Call Market,
+            PB Solutions, Peace of Mind Solutions, Peak Advertising, Peak
+            Performance, Peak Property and Casualty Insurance, Peak Protection
+            Group, Pemco, PEMCO Insurance, Penn America, Penn Mutual,
+            Pennsylvania Natl, Phoenix, Phoenix Life, Physicians Health Plan,
+            Physicians Life, Physicians Mutual, Physicians United Plan,
+            Pickett Group/TermLifeMatch, Pier21 Media, Ping Leads, Pinnacle,
+            Pinney Insurance Center, Inc., Pioneer Life, Pivot, Pivot Health,
+            PivotHealth, LLC, PJP Agency, PJP Health, PJP Health Agency,
+            Plasmid Direct, Plasmid Media, LLC, Platinum Leads, Platinum Plus
+            Auto Protection, Plymouth Rock, PM Group Loans, PMIC, PolicyBind,
+            PolicyFuel, Power Source Marketing, Practical Marketing, Precise,
+            Precise Health Insurance Advisors, Precise Leads, Precise
+            Solutions Group, Precursor Media, Precursor Media, LLC, Preferred
+            Abstainers, Preferred Care, Preferred Health Advisors, Preferred
+            Health Solutions LLC, Preferred Mutual, Premera Blue Cross,
+            Premier, Premier Business Solutions, Premier Choice Health,
+            Premier Disability, Premier Health Solutions, Premier Precision
+            Group, Premium Precision Marketing, Presbyterian Health Plan,
+            Presbyterian Healthcare Services, Presidio, Presidio Interactive,
+            Presidio Interactive Corp, Presidio Interactive LLC, Presido
+            Interactive, Prestige, Primary Health Care, Prime Care, Prime Care
+            Health, Primerica, Principal, Principal Financial, Principal
+            Financial Group, Principal Life, Priority Health, Priority
+            Insurance, Priority One Health, Pristine Media Group, Private
+            Reserve Group, Inc, ProEco Solutions Inc, Progressive, Progressive
+            Auto Pro, Progressive Insurance, Progressive Motorcycle, Promise
+            Health Insurance, Protech Vehicle Services LLC, Protect My Car,
+            Protect Your Home, Protective Casualty, Protective Life,
+            Protectmycar.com, Providence, Providence Health Plan, Provident,
+            Prudential, Prudential Insurance Co., Prudential of America, PURE,
+            Puritan Health, PX Inc, Pyramid Life, Q3M Insurance Solutions LLC,
+            Qatalyst, QHS, Qualified Healthcare Solutions, Qualilty Healthcare
+            Solutions, Quality, Quality Health Organization, Quality
+            Healthcare Solutions, Quality Healthcare Solutions, Inc., Quantum
+            3 Media, LLC, Quick Health, Quick Life Center, LLC, Quick Medigap,
+            QuickInsured, QuickQuote, Quilt, QuinStreet, Inc., Quote Engine,
+            Quote Selection, Quote Selection Insurance Services, Inc, Quote
+            Storm, Quote Whiz LLC, Quote Wizard, Quotelab, QuoteLab Marketing
+            Partners, QuoteStorm, QuoteWhiz, QuoteWhiz, LLC, QuoteWizard,
+            QuotIt, Ramsey, Ranger, Rank Media, Rank Media Agency,
+            RateMarketplace, Ray Chisolm, RBC Liberty Insurance, Real Results,
+            Recall Digital, Red Auto Protection, Red Ocean Leads, RedVentures,
+            Reel Media Ventures, Reel Media Ventures, LLC, Refipros, Regal,
+            Regence, Reliable Auto Service Contracts, Reliance, Reliance
+            Insurance, Reliance National Indemnity, Reliance National
+            Insurance, Reliant, ReliaQuote, Renaissance Health Services Corp.,
+            Renew.com, Renew.com Inc., RepairBANC, Republic Indemnity,
+            Resource Group, Response Insurance, Revi Media, ReviMedia,
+            RevPoint Media, Rex Direct, Ring Latino, Ring Router, Rising Eagle
+            Capital Group, RMC Insurance Services, RMC Insurance Services LLC,
+            Roadstead Auto Protection, Rockford Mutual, Rodney D. Young, Rogue
+            E-Cigs, Ronin Revenue, Royal Admin, RPG Leads, RPM Direct, RSA,
+            Safe Auto, Safe Streets USA LLC, SafeAuto, SAFECO, Safeguard,
+            Safeguard Ins Market, Safeguard Insurance Market, Safeway, Safeway
+            Insurance, Safeway Insurance Co of AL, Safeway Insurance Co of GA,
+            Safeway Insurance Co of LA, Sagicor, SalesRadix, Savings Bank Life
+            Insurance Company of Massachusetts (SBLI), SBLI, Scan Health Plan,
+            SCMS, Scott and White, ScriptRelief, Sea West Insurance, Seascape,
+            Seascape Health, Seascape Life, Secura, Secure Automotive
+            Solutions Inc, Secure Car Care, Secure Horizons, Secured Health,
+            Secured Health and Life, Security Health Plan of Wisconsin Inc.,
+            Security Insurance, Security Insurance Co of Hartford, Security
+            National, Security National Insurance Co of FL, Sedgwick James,
+            Select Quote, Select Quote Senior, SelectHealth, Selective
+            Healthcare, SelectQuote, SelectQuote A&amp;H, SelectQuote
+            A&amp;H;, SelectQuote Insurance Services, SelectQuote Life,
+            SelectQuote Senior, Senior Care Benefits, LLC, Senior Care USA,
+            Senior Health Connect, Senior Health Connection, Senior Health
+            Direct, Senior Healthcare Direct, Senior Market, Senior Market
+            Advisors, Senior Market Partners, Senior Market Quotes, Senior
+            Market Sales, Senior Plus Advisors, SeniorCare USA, SeniorQuote
+            Insurance Services, Sentara Health Management, Sentinel Insurance,
+            Sentry, Sentry Group, Sentry Insurance a Mutual Company, Sentry
+            Insurance Company, Sentry Insurance Group, Sharp Health Plan,
+            Shelter Insurance, Shelter Insurance Co., Shelter Insurance
+            Company, Sierra Health Services, Simple Health, Simple Health
+            Plans, Simple Health Plans Inc., Simple Insurance, Simple
+            Insurance Leads, Simple Save Auto, Simpson Financial, Simpson
+            Financial Group, Single Care, SingleCare Services, Singularity
+            Media, Skandia TIG Tita, Smart Match Insurance Solutions, Smart
+            Relief Rx, SmartFinancial, SmartHome Solar Solutions USA,
+            SmartHome Solutions USA, Smedley Insurance Group, SolarJoy,
+            SolidQuote LLC, SolidQuote, LLC, Spartan Health Group, Spectrum,
+            Spectrum Direct, Spectrum Health, Spinner Group, Spring EQ, Spring
+            Health Plans, Spring Insurance, Spring Insurance Solutions, Spring
+            Venture, Spring Venture Group, SS Telemarketing, St. Paul, St.
+            Paul Companies, St. Paul Fire and Marine, St. Paul Insurance,
+            Stancorp Financial, Standard Fire Insurance Company, Standard
+            Guaranty, Standard Life, Standard Security Life Insurance Company
+            of New York, Star Advertising, Starmount Life, State and County
+            Mutual Fire Insurance, State Auto, State Farm, State Farm County,
+            State Farm Fire and Cas, State Farm General, State Farm Indemnity,
+            State Farm Insurance, State Farm Insurance Co., State Farm Lloyds
+            Tx, State Farm Mutual Auto, State Fund, State Mutual, State
+            National, State National Insurance, Sterling, Sterling Senior,
+            Sterling Senior Health, Stone Hill National, StoneTapert Employee
+            Benefits, Strategy Bay, Stride Health, Strike Marketing LLC,
+            SubjectWell, SummaCare, Summit Health, Sun Coast, Sun Life
+            Assurance Company, Sunlight 4 Solar, Sunpath Limited, Sunrise
+            Health, Suntuity, Superior American Insurance, Superior Guaranty
+            Insurance, Superior Health Insurance Group, Superior Insurance,
+            Support First, Sure Health Plans, Sure Touch Leads, Sureco, Sureco
+            Legacy Insurance Services, Inc, Suretouchleads, Surveillance,
+            Sutter, SVG, Swiss Re, Syndicated Plus, Tallac Media, Taylor
+            Agency, Tech Insurance, Term Life Match, TexanPlus, The Ahbe
+            Group, The Atlas Company, The Benefit Link, The Benefit Outlet,
+            The Complete Lead, The Credo Group, The General, The Hartford, The
+            Hartford AARP, The IHC Group, The Insurance Center, The Lead
+            Company, The McGrp International, The McGrp International, LLC,
+            The Product Drivers, The Quick Life Center, LLC, The Regence
+            Group, The Senior Resource Group, The Zebra,
+            The-Solar-Project.com, themedicareassistant.com, ThomasARTS, Three
+            Rivers Holdings, Thrivent Financial for Lutherans, TIAA-CREF,
+            Tiburon Insurance Services, TICO Insurance, TIG Countrywide
+            Insurance, Titan, Titan Indemnity, TMHCC, Tobias &amp; Associates,
+            Tobias &amp; Associates Inc, TOCO, Today Medicare, Todd Matzat,
+            Toolbox OS, Torchlight, Torchlight Technology, Torchlight
+            Technology Group, Torchlight Technology Group, LLC, Torchmark,
+            Total, Total Insurance Brokers INC, Total Insurance Brokers INC
+            a.k.a. Health Coverage Fast, Touchstone, Tower, Towers Watson,
+            Towers Watson dba OneExchange, TPG Direct, TradeMarc Global, LLC,
+            Traders Insurance, Transamerica, TRANZACT, Tranzact Insurance
+            Services, Tranzact Insurance Solutions, Travelers, Travelers
+            Indemnity, Travelers Insurance Company, Tri-State Consumer,
+            Tri-State Consumer Insurance, Tricare, Trinity Universal, Triple-S
+            Inc., TriState, Tru Source, TruBridge, TruBridge, Inc., True Auto,
+            TrueChoice Insurance Services, TruSource Marketing, Trust Hall,
+            Trusted Health Quotes, Tryton, TSC Direct, TSC Insurance, Tufts,
+            Tufts Associates HMO Inc., Tufts Health Plan, Twentieth Century,
+            TWG, Twin City Fire Insurance, TZ Insurance Solutions, TZ
+            Insurance Solutions LLC, U S Financial, Ucare, UHOne, UMA,
+            Underground Elephant, Unicare, Unified Rightmed, Uniguard, Union,
+            Unique Q2B, United American, United American Insurance Company,
+            United American/Farm and Ranch, United Financial, United Fire
+            &amp; Casual, United Health Care, United Health One, United
+            Healthcare, United Healthcare Advisors, United HealthCare
+            Services, Inc., United Insurance, United Medicare, United Medicare
+            Advisors, United of Omaha, United Pacific Insurance, United Repair
+            Programs, United Security, United Services Automobile Association,
+            United States Fideli, United Teacher Associates Ins Co.,
+            UnitedHealth Group, UnitedHealthcare,
+            UnitedHealthcare/UnitedHealthOne, Unitrin, Unitrin Direct, Unitrin
+            Inc., Universal American, Universal American Corporation,
+            Universal American Financial Corp., Universal Health Advisors,
+            Universal Health Care, Universal Healthcare Advisors, LLC,
+            Universal Underwriters Insurance, University Health Care Inc.,
+            Unsure, UnumProvident Corp., UPMC, UPMC Health System, US Benefit
+            Solutions, US Energy Alliance, US Financial, US Financial Life, US
+            Health Advisors, US Health Advisors LLC, US Health Benefits Group,
+            US Health Group, US Health Group (Freedom Life), US Insurance
+            Online, US Marketing Group, US Web Leads, USA Auto Protection, USA
+            Benefits/Continental General, USA Dental Club, USA Health Options,
+            USA Medical Card, USAA, USAA., USDS (US Dealer Services), Used
+            Imagination, USF and G, USF&amp;G;, USHealth Advisors, USHEALTH
+            Group, USInsuranceOnline, Utah Home and Fire, Utica, Valiant Auto,
+            Valley Health Plan, Vanguard Health Ventures, Vanguard Vehicle
+            Armor, Vantis Life, Vasa North Atlantic, Vehicle Protection,
+            Vehicle Protection Center, Vehicle Protection Specialists,
+            Velapoint, VelaPoint Personal Insurance, Verified Insurance Lead,
+            Versible Connect, Versus Media Group, Verti Insurance, Vertical
+            Media Brands, Vertigen LLC, Vigilant, Viking, Viking County Mutual
+            Insurance, Viking Insurance Co of WI, VIMO, Visiqua, Visiqua, LLC,
+            Vital One Health, Vital One Health Plans Direct, LLC, Vitalone,
+            Vitalone Health, VitalOne Health Plans, VitalOne Health Plans
+            Direct, LLC., Viva Health, Voxify, Voxify LLC, VSP, Warranty
+            Agents, Warranty Direct, Washington National Insurance Co.,
+            Washington National Life, Wawaunesa, Wax Digital Solutions, We
+            Speak, WEA Inc., WebTec, Wejo, Wellcare, WellCare Health Plans,
+            Wellington, Wellness Plan of America, WellPoint, West American,
+            West Bend Mutual, West Field, West Plains, Western &amp; Southern
+            Life, Western and Southern Life, Western Health Advantage, Western
+            Mutual, Western National, Westfield, Weston insurance services
+            ins, Wheaten Worldwide, William Penn, Windhaven, Windsor, Windsor
+            Insurance, Windstar, Wisconsin Mutual, Woodland Health Group,
+            Woodlands Financial Group, Woodmen of the World, Word &amp; Brown,
+            World Insurance, World Mail Direct USA, Worldwide, WynnHealth,
+            XLHealth, XLHealth., Yellow Key, Yosemite, Your Lowest Quote,
+            YourHealthCareQuotes.com, YourLowestQuote, Zander, Zander
+            Insurance, Zebra, Zenith Media, Zoom Insurance, ZQ Sales, Zurich,
+            Zurich North America, and Zurich North America or other
+            partners.</span>
+        </p>
+      </div>
+      <div class="footer">
+        <div>© 2025 getsavingsreview.com</div>
+        <div class="footer-links">
+          <a href="./privacy-policy.html">Privacy Policy</a> |
+          <a href="./term-of-services.html">Terms Of Service</a> |
+          <a href="./california-policy.html">California Privacy Notice</a> |
+          <a href="./sms-terms.html">SMS Terms</a> |
+          <a href="./disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

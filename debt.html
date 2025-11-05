@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veterans Debt Relief Program</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #e8eef5 0%, #d9e4f1 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .alert-badge {
+        background: #dc3545;
+        color: white;
+        padding: 12px 32px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        width: 20rem;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .section {
+        display: none;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section 1 Styles */
+      .hero-section {
+        text-align: center;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-section h1 {
+        font-size: 48px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: #1a1a1a;
+      }
+
+      .hero-section p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 40px;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 800px;
+        height: 350px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        overflow: hidden;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cta-button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 18px 48px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .cta-button:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      }
+
+      /* Form Sections */
+      .form-container {
+        background: white;
+        border-radius: 12px;
+        padding: 50px;
+        max-width: 900px;
+        width: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .form-container h2 {
+        font-size: 25px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 15px;
+        color: #1a1a1a;
+      }
+
+      .form-container .subtitle {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 40px;
+        color: #333;
+      }
+
+      .form-container .subtitle strong {
+        text-decoration: underline;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #007bff;
+        border-radius: 10px;
+        transition: width 0.5s ease;
+      }
+
+      .question {
+        font-size: 28px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #1a1a1a;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .option-button {
+        background: #ffc107;
+        border: none;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #1a1a1a;
+      }
+
+      .option-button:hover {
+        background: #ffb300;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+      }
+
+      /* Congratulations Section */
+      .congrats-section {
+        text-align: center;
+      }
+
+      .congrats-section h2 {
+        margin-bottom: 30px;
+        font-weight: 500;
+      }
+
+      .congrats-image {
+        width: 100%;
+        max-width: 560px;
+        height: 280px;
+        border-radius: 8px;
+        margin: 0 auto 60px;
+        overflow: hidden;
+      }
+
+      .congrats-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Loading Spinner - Exact Match */
+      .loading-spinner {
+        width: 80px;
+        height: 80px;
+        border: 3px solid #e8e8e8;
+        border-top: 3px solid #666;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 30px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 18px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .finish-text {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+      }
+
+      .footer {
+        margin-top: auto;
+        padding-top: 40px;
+        text-align: center;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .footer-links {
+        margin-top: 10px;
+        color: #999;
+      }
+
+      .footer-links a {
+        color: #999;
+        text-decoration: none;
+        margin: 0 5px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-section h1 {
+          font-size: 32px;
+        }
+
+        .form-container {
+          padding: 30px 20px;
+        }
+
+        .question {
+          font-size: 22px;
+        }
+
+        .option-button {
+          font-size: 18px;
+        }
+
+        .hero-image {
+          height: 200px;
+        }
+
+        .congrats-image {
+          height: 100%;
+        }
+
+        .congrats-image img {
+          border-radius: 1rem;
+        }
+
+        .congrats-section h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+        .hero-section h1 {
+          font-size: 30px;
+        }
+
+        .alert-badge {
+          padding: 7px 32px;
+          width: 15rem;
+        }
+
+        .hero-section p {
+          font-size: 15px;
+          margin-bottom: 20px;
+        }
+
+        /* .finish-text {
+          font-size: 1px;
+        } */
+      }
+    </style>
+
+    <script>
+      !(function () {
+        "use strict";
+        var n = "lp_ref",
+          t = "cpid",
+          e = "lpurl",
+          c = "https://webeasyhit.com",
+          r = "(?<domain>http(?:s?)://[^/])".concat("/cf/click"),
+          a = "(?:(?:/(?<cta>[1-9][0-9])/?)|(?:/))?",
+          i = "^".concat(r).concat(a).concat("(?:$|(\\?.))"),
+          o = 'javascript:window.clickflare.l="(?<original_link>'
+            .concat(r)
+            .concat(a, '("|(\\?[^"]"))).*'),
+          s = function () {
+            return new RegExp(i, "");
+          },
+          u = function () {
+            return new RegExp(o, "");
+          };
+        function l(n) {
+          var t = (function (n) {
+            return n.replace(s(), function (n) {
+              for (var t = [], e = 1; e < arguments.length; e++)
+                t[e - 1] = arguments[e];
+              var r = t[t.length - 1].domain;
+              return n.replace(r, c);
+            });
+          })(n);
+          return 'javascript:window.clickflare.l="'.concat(t, '"; void 0;');
+        }
+        function f(n, t) {
+          if (
+            (t && n && t.apply(document, [n]),
+            /loaded|interactive|complete/.test(document.readyState))
+          )
+            for (var e = 0, c = document.links.length; e < c; e++)
+              if (s().test(document.links[e].href)) {
+                var r = document.links[e];
+                window.clickflare.links_replaced.has(r) ||
+                  ((r.href = l(r.href)),
+                  window.clickflare.links_replaced.add(r));
+              }
+        }
+        var d, h, m, p;
+        !(function (r, a) {
+          var i = document.onreadystatechange;
+          window.clickflare ||
+            ((window.clickflare = {
+              listeners: {},
+              customParams: {},
+              links_replaced: new Set(),
+              addEventListener: function (n, t) {
+                var e = this.listeners[n] || [];
+                e.includes(t) || e.push(t), (this.listeners[n] = e);
+              },
+              dispatchEvent: function (n, t) {
+                t && (this.customParams[n] = t),
+                  (this.listeners[n] || []).forEach(function (n) {
+                    return n(t);
+                  });
+              },
+              push: function (n, t) {
+                t && (this.customParams[n] = t),
+                  (this.listeners[n] || []).forEach(function (n) {
+                    return n(t);
+                  });
+              },
+            }),
+            (document.onreadystatechange = function (n) {
+              return f(n, i);
+            }),
+            f(null, i),
+            setTimeout(function () {
+              !(function (r, a) {
+                var i,
+                  o = (function (r, a) {
+                    var i = new URL("".concat(c).concat(r)),
+                      o = "{",
+                      s = o + o;
+                    a.startsWith(s) || i.searchParams.set(t, a);
+                    return (
+                      i.searchParams.append(n, document.referrer),
+                      i.searchParams.append(e, location.href),
+                      i.searchParams.append("lpt", document.title),
+                      i.searchParams.append(
+                        "t",
+                        new Date().getTime().toString()
+                      ),
+                      i.toString()
+                    );
+                  })(r, a),
+                  s = document.createElement("script"),
+                  l = document.scripts[0];
+                (s.async = 1),
+                  (s.src = o),
+                  (s.onerror = function () {
+                    !(function () {
+                      for (
+                        var n = function (n, t) {
+                            var e = document.links[n];
+                            u().test(e.href) &&
+                              setTimeout(function () {
+                                e &&
+                                  e.setAttribute(
+                                    "href",
+                                    (function (n) {
+                                      var t = n.match(u());
+                                      if (t) {
+                                        var e = (t.groups || {}).original_link;
+                                        return e ? e.slice(0, -1) : n;
+                                      }
+                                      return n;
+                                    })(e.href)
+                                  );
+                              });
+                          },
+                          t = 0,
+                          e = document.links.length;
+                        t < e;
+                        t++
+                      )
+                        n(t);
+                    })();
+                  }),
+                  null === (i = l.parentNode) ||
+                    void 0 === i ||
+                    i.insertBefore(s, l);
+              })(r, a);
+            }));
+        })(
+          ""
+            .concat("/cf/tags", "/")
+            .concat(
+              new URL(window.location.href).searchParams.get("cftmid") ||
+                "{{_CONTAINER_ID}}"
+            ),
+          ((m = new URL(window.location.href).searchParams.get(t)),
+          (d = new RegExp("(^| )".concat("cf_cpid", "=([^;]+)"))),
+          (p = ((h = document.cookie.match(d)) && h.pop()) || null),
+          m || p || "{{CAMPAIGN_ID_}}")
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Section 1: Hero -->
+    <div id="section1" class="section active">
+      <div class="alert-badge">TIME IS LIMITED TO FILE!</div>
+      <div class="hero-section">
+        <h1>
+          Veterans Struggling With Credit Card Debt Are Eligible For Debt
+          Relief, Through This Program!
+        </h1>
+        <p>Answer a few questions to find out if you qualify</p>
+        <div class="hero-image">
+          <img
+            src="./debt-files/veteran_cash.webp"
+            alt="US Army Soldier with Cash"
+          />
+        </div>
+        <button class="cta-button" onclick="nextSection(2)">
+          See If I Qualify
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section 2: Are you a veteran? -->
+    <div id="section2" class="section">
+      <div class="alert-badge">TIME IS LIMITED TO FILE!</div>
+      <div class="form-container">
+        <h2>Find Out if You Qualify</h2>
+        <p class="subtitle">
+          <strong>Thousands</strong> Of Veterans Have Already Received Debt
+          Relief
+        </p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 30%"></div>
+        </div>
+        <div class="question">Are you a veteran?</div>
+        <div class="options">
+          <button class="option-button" onclick="nextSection(3)">Yes</button>
+          <button class="option-button" onclick="nextSection(3)">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Credit card debt amount -->
+    <div id="section3" class="section">
+      <div class="alert-badge">TIME IS LIMITED TO FILE!</div>
+      <div class="form-container">
+        <h2>Find Out if You Qualify</h2>
+        <p class="subtitle">
+          <strong>Thousands</strong> Of Veterans Have Already Received Debt
+          Relief
+        </p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 70%"></div>
+        </div>
+        <div class="question">How much credit card debt do you have?</div>
+        <div class="options">
+          <button class="option-button" onclick="nextSection(4)">
+            Over $20,000
+          </button>
+          <button class="option-button" onclick="nextSection(4)">
+            Under $20,000
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Congratulations with loading -->
+    <div id="section4" class="section">
+      <div class="form-container congrats-section">
+        <h2>Congrats! You are Eligible for Debt Relief.</h2>
+        <div class="congrats-image">
+          <img
+            src="./debt-files/veteran_happy.webp"
+            alt="Happy Military Family"
+          />
+        </div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+          Just a few more questions on the next screen...
+        </div>
+        <div class="finish-text">
+          Please finish answering the questions to see the<br />amount of debt
+          relief you qualify for.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>© 2025 getsavingsreview.com</div>
+      <div class="footer-links">
+        <a href="./debt-files/privacy-policy.html">Privacy Policy</a> | <a href="./debt-files/term-of-services.html">Terms Of Service</a> |
+        <a href="./debt-files/california-policy.html">California Privacy Notice</a> | <a href="./debt-files/sms-terms.html">SMS Terms</a> |
+        <a href="./debt-files/disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+
+    <script>
+      let currentSection = 1;
+
+      function nextSection(sectionNumber) {
+        // Hide current section
+        document
+          .getElementById("section" + currentSection)
+          .classList.remove("active");
+
+        // Show next section
+        currentSection = sectionNumber;
+        document
+          .getElementById("section" + currentSection)
+          .classList.add("active");
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // If it's the congratulations section, redirect after 2 seconds
+        if (sectionNumber === 4) {
+            setTimeout(() => {
+              // Replace with your desired URL
+              window.location.href = "https://webeasyhit.com/cf/click/1 ";
+            }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>

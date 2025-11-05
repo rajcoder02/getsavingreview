@@ -1,0 +1,373 @@
+button,
+img {
+  display: block;
+}
+.button-icons,
+.comment:nth-child(3),
+.comment:nth-child(3) .comment-reply {
+  position: relative;
+}
+
+:root {
+  --header: #003792;
+  --header-text: #fff;
+  --bg: #fff;
+  --text: #000;
+  --text-gray: #65686c;
+  --cta-bg: #fafafa;
+  --cta-text: #fff;
+  --cta-button: #fe2c55;
+  --comm-bg: #f0f2f5;
+  --button: #008932;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: var(--text);
+}
+button {
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+.container {
+  margin: 0 auto;
+  max-width: 940px;
+}
+header {
+  background: var(--header);
+}
+.header-inner {
+  display: flex;
+  gap: 6px;
+  padding: 24px 0;
+  font-size: 28px;
+  /* font-family: "Poppins Bold"; */
+  color: var(--header-text);
+}
+.date,
+.inner-bottom {
+  /* font-family: "Poppins Regular"; */
+}
+.top-section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  margin: 24px auto 34px;
+}
+.comments-list,
+.cta-text,
+.inner-content-top {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.comments-inner,
+.cta-inner {
+  flex-direction: column;
+  display: flex;
+}
+.date {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+.inner-content-top h1 {
+  font-size: 40px;
+  /* font-family: "Poppins Bold"; */
+}
+.inner-content-top h2 {
+  font-size: 22px;
+  font-weight: 400;
+  /* font-family: "Poppins Medium"; */
+}
+.inner-bottom {
+  width: 90%;
+  font-size: 18px;
+}
+.cta-inner {
+  gap: 24px;
+  padding: 34px 0;
+  background-color: var(--cta-bg);
+}
+.cta-title {
+  font-size: 34px;
+  text-align: center;
+  /* font-family: "Poppins SemiBold"; */
+}
+.cta-caption {
+  font-size: 22px;
+  text-align: center;
+  /* font-family: "Poppins Medium"; */
+}
+.author-name,
+.author-text {
+  text-align: left;
+  font-size: 14px;
+}
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 39px;
+}
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 58px;
+  border-radius: 100px;
+  /* font-family: "Poppins Bold"; */
+  color: var(--cta-text);
+  background-color: var(--cta-button);
+}
+.stats-left,
+.stats-right {
+  /* font-family: "Poppins Regular"; */
+}
+.button,
+.stats-left,
+.stats-right,
+.text-top {
+  color: var(--text-gray);
+}
+.comments-inner {
+  gap: 20px;
+  margin: 34px auto 38px;
+  padding-top: 10px;
+  border-top: 2px solid #e5e5e5;
+}
+.comments-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.comment-bottom,
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.stats-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.buttons,
+.stats-right {
+  align-items: center;
+  display: flex;
+}
+.stats-right {
+  gap: 16px;
+}
+.button,
+.comment-reply p,
+.footer-nav a {
+  /* font-family: "Poppins Medium"; */
+}
+.buttons {
+  justify-content: space-around;
+}
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.comment-content,
+.comments-content {
+  flex-direction: column;
+  display: flex;
+}
+.comments-content {
+  gap: 20px;
+}
+.text-top {
+  /* font-family: "Poppins Regular"; */
+}
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.comment > img {
+  width: 32px;
+}
+.comment-content {
+  gap: 10px;
+}
+.comment:nth-child(3) .comment-content::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 40px;
+  bottom: 20px;
+  border-left: 2px solid #e5e7eb;
+  height: 50%;
+}
+.comment-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background-color: var(--comm-bg);
+}
+.author-name {
+  /* font-family: "Poppins medium"; */
+  color: var(--text);
+}
+.author-text {
+  /* font-family: "Poppins Regular"; */
+}
+.bottom-left,
+.bottom-right {
+  font-size: 12px;
+  /* font-family: "Poppins SemiBold"; */
+  color: var(--text-gray);
+}
+.comment-image {
+  max-width: 220px;
+}
+.bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.bottom-right,
+.comment-reply {
+  align-items: center;
+  display: flex;
+}
+.bottom-right {
+  gap: 2px;
+}
+.comment-reply {
+  gap: 8px;
+}
+.comment:nth-child(3) .comment-reply::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: -5px;
+  width: 22px;
+  height: 18px;
+  border-left: 2px solid #e5e7eb;
+  border-bottom: 2px solid #e5e7eb;
+  border-bottom-left-radius: 10px;
+}
+.comment-reply img {
+  width: 24px;
+}
+.comment-reply p {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+.section-bottom {
+  text-align: center;
+  /* font-family: "Poppins Regular"; */
+  color: var(--text-gray);
+}
+.bottom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 0;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 24px;
+  text-transform: uppercase;
+  /* font-family: "Poppins Bold"; */
+  color: var(--cta-text);
+  background-color: var(--button);
+}
+.button-icons {
+  display: flex;
+}
+.button-icons :last-child {
+  position: absolute;
+  top: 0;
+  right: -12px;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 50px auto 16px;
+}
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.footer-nav a {
+  text-decoration: underline;
+}
+.footer-text {
+  text-align: center;
+  /* font-family: "Poppins Regular"; */
+}
+@media screen and (max-width: 950px) {
+  .container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .bottom-button {
+    margin: 0;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .top-section-inner {
+    gap: 16px;
+  }
+  .inner-content-top h1 {
+    font-size: 28px;
+  }
+  .bottom-button,
+  .cta-caption,
+  .inner-content-top h2 {
+    font-size: 18px;
+  }
+  .inner-bottom {
+    font-size: 16px;
+  }
+  .cta-title {
+    font-size: 24px;
+  }
+  .form {
+    gap: 18px;
+  }
+  .comment:nth-child(3) .comment-content::before {
+    height: 60%;
+  }
+  .footer-text {
+    font-size: 14px;
+  }
+}

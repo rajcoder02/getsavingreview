@@ -1,0 +1,43 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/debt",
+      "destination": "/debt.html"
+    },
+    {
+      "source": "/windows",
+      "destination": "/windows.html"
+    },
+    {
+      "source": "/bathroom",
+      "destination": "/bathroom.html"
+    },
+    {
+      "source": "/roofing",
+      "destination": "/roofing.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/debt.html",
+      "destination": "/debt",
+      "permanent": true
+    },
+    {
+      "source": "/windows.html",
+      "destination": "/windows",
+      "permanent": true
+    },
+    {
+      "source": "/roofing.html",
+      "destination": "/roofing",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom.html",
+      "destination": "/bathroom",
+      "permanent": true
+    }
+  ]
+}

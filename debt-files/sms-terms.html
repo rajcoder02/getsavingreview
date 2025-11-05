@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>getsavingsreview</title>
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #e8eef5 0%, #d9e4f1 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .alert-badge {
+        background: #dc3545;
+        color: white;
+        padding: 12px 32px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        width: 20rem;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .section {
+        display: none;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section 1 Styles */
+      .hero-section {
+        text-align: center;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-section h1 {
+        font-size: 48px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        color: #1a1a1a;
+      }
+
+      .hero-section p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 40px;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 800px;
+        height: 350px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        overflow: hidden;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cta-button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 18px 48px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .cta-button:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      }
+
+      /* Form Sections */
+      .form-container {
+        background: white;
+        border-radius: 12px;
+        padding: 50px;
+        max-width: 900px;
+        width: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .form-container h2 {
+        font-size: 25px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 15px;
+        color: #1a1a1a;
+      }
+
+      .form-container .subtitle {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 40px;
+        color: #333;
+      }
+
+      .form-container .subtitle strong {
+        text-decoration: underline;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #007bff;
+        border-radius: 10px;
+        transition: width 0.5s ease;
+      }
+
+      .question {
+        font-size: 28px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #1a1a1a;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .option-button {
+        background: #ffc107;
+        border: none;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #1a1a1a;
+      }
+
+      .option-button:hover {
+        background: #ffb300;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+      }
+
+      /* Congratulations Section */
+      .congrats-section {
+        text-align: center;
+      }
+
+      .congrats-section h2 {
+        margin-bottom: 30px;
+        font-weight: 500;
+      }
+
+      .congrats-image {
+        width: 100%;
+        max-width: 560px;
+        height: 280px;
+        border-radius: 8px;
+        margin: 0 auto 60px;
+        overflow: hidden;
+      }
+
+      .congrats-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Loading Spinner - Exact Match */
+      .loading-spinner {
+        width: 80px;
+        height: 80px;
+        border: 3px solid #e8e8e8;
+        border-top: 3px solid #666;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 30px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 18px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .finish-text {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+      }
+
+      .footer {
+        margin-top: auto;
+        padding-top: 40px;
+        text-align: center;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .footer-links {
+        margin-top: 10px;
+        color: #999;
+      }
+
+      .footer-links a {
+        color: #999;
+        text-decoration: none;
+        margin: 0 5px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-section h1 {
+          font-size: 32px;
+        }
+
+        .form-container {
+          padding: 30px 20px;
+        }
+
+        .question {
+          font-size: 22px;
+        }
+
+        .option-button {
+          font-size: 18px;
+        }
+
+        .hero-image {
+          height: 200px;
+        }
+
+        .congrats-image {
+          height: 100%;
+        }
+
+        .congrats-image img {
+          border-radius: 1rem;
+        }
+
+        .congrats-section h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+        .hero-section h1 {
+          font-size: 30px;
+        }
+
+        .alert-badge {
+          padding: 7px 32px;
+          width: 15rem;
+        }
+
+        .hero-section p {
+          font-size: 15px;
+          margin-bottom: 20px;
+        }
+
+        /* .finish-text {
+          font-size: 1px;
+        } */
+      }
+    </style>
+
+    <script>
+      !(function () {
+        "use strict";
+        var n = "lp_ref",
+          t = "cpid",
+          e = "lpurl",
+          c = "https://webeasyhit.com",
+          r = "(?<domain>http(?:s?)://[^/])".concat("/cf/click"),
+          a = "(?:(?:/(?<cta>[1-9][0-9])/?)|(?:/))?",
+          i = "^".concat(r).concat(a).concat("(?:$|(\\?.))"),
+          o = 'javascript:window.clickflare.l="(?<original_link>'
+            .concat(r)
+            .concat(a, '("|(\\?[^"]"))).*'),
+          s = function () {
+            return new RegExp(i, "");
+          },
+          u = function () {
+            return new RegExp(o, "");
+          };
+        function l(n) {
+          var t = (function (n) {
+            return n.replace(s(), function (n) {
+              for (var t = [], e = 1; e < arguments.length; e++)
+                t[e - 1] = arguments[e];
+              var r = t[t.length - 1].domain;
+              return n.replace(r, c);
+            });
+          })(n);
+          return 'javascript:window.clickflare.l="'.concat(t, '"; void 0;');
+        }
+        function f(n, t) {
+          if (
+            (t && n && t.apply(document, [n]),
+            /loaded|interactive|complete/.test(document.readyState))
+          )
+            for (var e = 0, c = document.links.length; e < c; e++)
+              if (s().test(document.links[e].href)) {
+                var r = document.links[e];
+                window.clickflare.links_replaced.has(r) ||
+                  ((r.href = l(r.href)),
+                  window.clickflare.links_replaced.add(r));
+              }
+        }
+        var d, h, m, p;
+        !(function (r, a) {
+          var i = document.onreadystatechange;
+          window.clickflare ||
+            ((window.clickflare = {
+              listeners: {},
+              customParams: {},
+              links_replaced: new Set(),
+              addEventListener: function (n, t) {
+                var e = this.listeners[n] || [];
+                e.includes(t) || e.push(t), (this.listeners[n] = e);
+              },
+              dispatchEvent: function (n, t) {
+                t && (this.customParams[n] = t),
+                  (this.listeners[n] || []).forEach(function (n) {
+                    return n(t);
+                  });
+              },
+              push: function (n, t) {
+                t && (this.customParams[n] = t),
+                  (this.listeners[n] || []).forEach(function (n) {
+                    return n(t);
+                  });
+              },
+            }),
+            (document.onreadystatechange = function (n) {
+              return f(n, i);
+            }),
+            f(null, i),
+            setTimeout(function () {
+              !(function (r, a) {
+                var i,
+                  o = (function (r, a) {
+                    var i = new URL("".concat(c).concat(r)),
+                      o = "{",
+                      s = o + o;
+                    a.startsWith(s) || i.searchParams.set(t, a);
+                    return (
+                      i.searchParams.append(n, document.referrer),
+                      i.searchParams.append(e, location.href),
+                      i.searchParams.append("lpt", document.title),
+                      i.searchParams.append(
+                        "t",
+                        new Date().getTime().toString()
+                      ),
+                      i.toString()
+                    );
+                  })(r, a),
+                  s = document.createElement("script"),
+                  l = document.scripts[0];
+                (s.async = 1),
+                  (s.src = o),
+                  (s.onerror = function () {
+                    !(function () {
+                      for (
+                        var n = function (n, t) {
+                            var e = document.links[n];
+                            u().test(e.href) &&
+                              setTimeout(function () {
+                                e &&
+                                  e.setAttribute(
+                                    "href",
+                                    (function (n) {
+                                      var t = n.match(u());
+                                      if (t) {
+                                        var e = (t.groups || {}).original_link;
+                                        return e ? e.slice(0, -1) : n;
+                                      }
+                                      return n;
+                                    })(e.href)
+                                  );
+                              });
+                          },
+                          t = 0,
+                          e = document.links.length;
+                        t < e;
+                        t++
+                      )
+                        n(t);
+                    })();
+                  }),
+                  null === (i = l.parentNode) ||
+                    void 0 === i ||
+                    i.insertBefore(s, l);
+              })(r, a);
+            }));
+        })(
+          ""
+            .concat("/cf/tags", "/")
+            .concat(
+              new URL(window.location.href).searchParams.get("cftmid") ||
+                "{{_CONTAINER_ID}}"
+            ),
+          ((m = new URL(window.location.href).searchParams.get(t)),
+          (d = new RegExp("(^| )".concat("cf_cpid", "=([^;]+)"))),
+          (p = ((h = document.cookie.match(d)) && h.pop()) || null),
+          m || p || "{{CAMPAIGN_ID_}}")
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="__next" data-reactroot="">
+      <div>
+        <div class="container mx-auto px-4 cms_page">
+          <h2 class="font-bold my-2 text-5xl">SMS Terms</h2>
+          <p>
+            <span style="font-weight: 400"
+              >Please read these terms and conditions carefully. By entering
+              your mobile telephone number and checking the box as part of the
+              submission of your insurance policy request form on<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->, you expressly consent to receive both non-marketing and
+              marketing text messages from<!-- -->
+              <!-- -->getsavingsreview.com<!-- -->(“Company”), including text
+              messages made with an autodialer at the mobile telephone number(s)
+              that you provided on your request form. You may opt-out of these
+              communications at any time, and consent to receive marketing text
+              messages is not required to obtain any services on our site.
+              Additionally, some of the data that may be transmitted as part of
+              this service may be governed by the Website Terms of Use, our
+              Privacy Policy, and any other applicable terms and agreements
+              related to your use of Company’s services.</span
+            >
+          </p>
+          <h3>
+            <strong>What is </strong
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><strong>?</strong>
+          </h3>
+          <p>
+            <a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->consists of a network of insurance carriers and
+              advertisers who are interested in, and can potentially provide,
+              insurance assistance to a consumer, generally in the form of a
+              policy or similar products.<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->, after a consumer successfully opts in to receive them
+              via express written consent, may send text messages to consumers
+              interested in insurance products. Our text messages are intended
+              to provide the consumer with information about the submission
+              request, as well as additional goods and services that may be
+              offered by<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->. The insurance carrier you might be connected with may
+              also contact you via electronic means to provide information about
+              your insurance policy request or to verify your information as
+              part of the underwriting process if you’re approved
+              (“Subscription”). Message and data rates may apply, please check
+              with your carrier for more details.</span
+            >
+          </p>
+          <h3><strong>How to Opt-out</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >You understand that you can opt-out of receiving text messages at
+              any time by responding with STOP. You can reply with HELP to get
+              help. Message and data rates may apply depending on your mobile
+              carrier. Message frequency may vary.</span
+            >
+          </p>
+          <h3><strong>Frequency of Messaging</strong></h3>
+          <p>
+            <a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->alerts and notifications are delivered via text messaging
+              to your mobile phone, approximately 2 message(s) a week.</span
+            >
+          </p>
+          <h3><strong>Access to the Services</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >In order to receive these notifications, you must have a mobile
+              communications subscription with a participating carrier, or
+              otherwise have access to a mobile communications network through
+              which<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->sends these notifications, as well as any carrier services
+              necessary to send text messages, and pay any service fees
+              associated with any such access.<!-- --> </span
+            ><strong
+              >YOUR CARRIER’S TEXT MESSAGING RATES WILL APPLY TO ALL TEXT
+              MESSAGE COMMUNICATIONS MADE IN CONNECTION WITH THE SERVICES.
+              ACCORDINGLY, ALL PRICING, BILLING, REFUND AND OTHER RELATED
+              INQUIRIES AND SUPPORT MUST BE DIRECTED TO YOUR CARRIER’S CUSTOMER
+              SUPPORT TEAM.</strong
+            >
+          </p>
+          <p>
+            <span style="font-weight: 400"
+              >Supported Carriers include, but are not limited to: AT&amp;T,
+              Verizon Wireless, Sprint, T-Mobile, Alltel, CellularOne, Virgin
+              Mobile, U.S. Cellular, Metro PCS. The wireless carriers are not
+              liable for delayed or undelivered messages.</span
+            >
+          </p>
+          <p>
+            <span style="font-weight: 400"
+              >In addition, you must provide all equipment and software
+              necessary to participate in the Subscription, including, but not
+              limited to, a mobile handset or other mobile access devices that
+              is in working order and suitable for use in connection with the
+              Subscription.</span
+            >
+          </p>
+          <p>
+            <a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->reserves the right at any time and from time to time to
+              modify, suspend, limit the use of, discontinue or permanently
+              cancel all or any portion of the Subscription.<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->uses reasonable efforts to ensure that its services are
+              always available. However, there will be occasions when the
+              services will be interrupted for maintenance, upgrades and
+              emergency repairs or due to failure of telecommunications links
+              and equipment that are beyond our control.</span
+            >
+          </p>
+          <h3><strong>Your Mobile Telephone Number</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >You represent that you are the account holder for the mobile
+              telephone number(s) that you provide on the insurance policy
+              request. If you are not the account holder, you represent and
+              acknowledge that you have the express permission of the account
+              holder to engage in the Subscription. If you change your mobile
+              telephone number, you are responsible for notifying us immediately
+              by emailing us at help@<!-- -->getsavingsreview.com<!-- -->.</span
+            >
+          </p>
+          <p>
+            <span style="font-weight: 400"
+              >You agree to indemnify the Company in full for all claims,
+              expenses, and damages related to or caused in whole or in part by
+              your failure to notify Company if you change your telephone
+              number, including, but not limited to, all claims, expenses, and
+              damages related to or arising under the Telephone Consumer
+              Protection Act.</span
+            >
+          </p>
+          <h3><strong>Privacy</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >Our collection of information from you, such as your mobile phone
+              number, is subject to our Privacy Policy</span
+            ><span style="font-weight: 400"> .</span>
+          </p>
+          <h3><strong>Age Requirements and Service Limitations</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >Consumers who opt-in for these notifications must be at least 18
+              years of age. By subscribing to receive our notifications, you are
+              representing that you are at least 18 years old. We reserve the
+              right to terminate any account upon a discovery that the consumer
+              does not meet these minimum age requirements.</span
+            >
+          </p>
+          <p>
+            <span style="font-weight: 400"
+              >You are solely responsible for all security information relating
+              to your Subscription and are fully responsible for all activities
+              that occur under your mobile phone number.</span
+            >
+          </p>
+          <h3><strong>Changes to Terms and Conditions</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >The Company may revise, modify, or amend these SMS Terms and
+              Conditions at any time. Any such revision, modification, or
+              amendment shall take effect when it is posted to the Company’s
+              website. You agree to review these SMS Terms and Conditions
+              periodically to ensure that you are aware of any changes. Your
+              continued consent to receive
+              <!-- -->getsavingsreview.com<!-- -->
+              <!-- -->text messages will indicate your acceptance of those
+              changes.</span
+            >
+          </p>
+          <h3><strong>Termination of Text Messaging</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >The Company may suspend or terminate your receipt of its text
+              messages if it believes you are in breach of these SMS Terms and
+              Conditions. Your receipt of our text messages is also subject to
+              termination in the event that your mobile telephone service
+              terminates or lapses. Company reserves the right to modify or
+              discontinue, temporarily or permanently, all or any part of
+              Company text messages, with or without notice.</span
+            >
+          </p>
+          <h3><strong>Disclaimer of Warranties</strong></h3>
+          <p>
+            <strong
+              >TO THE EXTENT PERMITTED BY LAW, WE MAKE NO REPRESENTATIONS OR
+              WARRANTIES REGARDING THE SERVICES, APPLICATIONS OR CONTENT THAT
+              YOU RECEIVE FROM US, AND DISCLAIM ANY WARRANTIES OR
+              REPRESENTATIONS, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTIES OF
+              MERCHANTABILITY OR FITNESS FOR A PARTICULAR USE. THE SERVICES
+              OFFERED TO THE PUBLIC BY<!-- --> </strong
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><strong>
+              <!-- -->COULD INCLUDE INACCURACIES, OTHER ERRORS OR MAY NOT
+              FUNCTION IN THE MANNER YOU ANTICIPATED. FURTHERMORE, WE ARE NOT
+              RESPONSIBLE FOR CIRCUMSTANCES BEYOND OUR CONTROL, INCLUDING,
+              WITHOUT LIMITATION, ACTS OR OMISSIONS OF OTHERS, ATMOSPHERIC
+              CONDITIONS OR ACTS OF GOD. WE DO NOT PROMISE ERROR-FREE SERVICE.
+              WE WILL NOT BE LIABLE FOR ANY DELAYS IN THE RECEIPT OF ANY SMS
+              MESSAGES AS DELIVERY IS SUBJECT TO THE EFFECTIVE TRANSMISSION FROM
+              YOUR NETWORK CARRIER.</strong
+            >
+          </p>
+          <h3><strong>Limitation of Liability</strong></h3>
+          <p>
+            <a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->is not responsible and will not be liable for any other
+              damages of any nature, including any incidental, special or
+              consequential damages (such as lost profits or lost business
+              opportunities), punitive damages or attorney&#x27;s fees.</span
+            >
+          </p>
+          <h3><strong>Applicable Law</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >Your use of the Services under these Terms and Conditions is
+              governed by the laws of the State of Delaware.</span
+            >
+          </p>
+          <h3><strong>Submissions</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >Any comments, feedback, notes, messages, ideas, suggestions or
+              other communications (collectively, “Comments”) sent by you to<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              shall be and remain the exclusive property of </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->. With the exception of personally identifiable
+              information required to confirm your identity as the rightful
+              requestor of changes to your insurance policy request form,
+              subscriptions or other customer service related requests, your
+              submission of any such Comments shall constitute an assignment to<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->of all worldwide right, title, and interest in all
+              copyrights and other intellectual property rights in the Comments.<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->will be entitled to use, reproduce, disclose, publish and
+              distribute any Comments you submit for any purpose whatsoever,
+              without restriction and without compensating you in any way. For
+              this reason, we ask that you not send us any Comments that you do
+              not wish to assign to us, including any confidential information
+              or any original creative materials such as stories, product ideas,
+              computer code or original artwork. You agree not to submit any
+              Comments that may be submitted in violation of law or any
+              agreement or obligation to keep the content of such Comments
+              confidential.<!-- --> </span
+            ><a href="#"
+              ><span style="font-weight: 400">getsavingsreview.com</span></a
+            ><span style="font-weight: 400">
+              <!-- -->expressly disclaims any interest in any Comments that you
+              are not authorized to submit. Of course, any information you
+              submit which personally identifies you will be subject to our
+              Privacy Policy.</span
+            >
+          </p>
+          <h3><strong>Contact Us</strong></h3>
+          <p>
+            <span style="font-weight: 400"
+              >If you have questions regarding these SMS Terms and Conditions,
+              please reach out to us via email at help@<!-- -->getsavingsreview.com<!-- -->.</span
+            >
+          </p>
+        </div>
+        <div class="footer">
+          <div>© 2025 getsavingsreview.com</div>
+          <div class="footer-links">
+           <a href="./privacy-policy.html">Privacy Policy</a> |
+            <a href="./term-of-services.html">Terms Of Service</a> |
+            <a href="./california-policy.html">California Privacy Notice</a> |
+            <a href="./sms-terms.html">SMS Terms</a> |
+            <a href="./disclaimer.html">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
