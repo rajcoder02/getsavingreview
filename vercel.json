@@ -23,7 +23,7 @@
     },
     {
       "source": "/veteransbenefits",
-      "destination": "/debtrelief.html"
+      "destination": "/veteransbenefits.html"
     }
   ],
   "redirects": [
@@ -53,7 +53,7 @@
       "permanent": true
     },
     {
-      "source": "/debtrelief.html",
+      "source": "/veteransbenefits.html",
       "destination": "/veteransbenefits",
       "permanent": true
     }
