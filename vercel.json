@@ -24,6 +24,10 @@
     {
       "source": "/veteransbenefits",
       "destination": "/veteransbenefits.html"
+    },
+    {
+      "source": "/benefitsforveterans",
+      "destination": "/benefitsforveterans.html"
     }
   ],
   "redirects": [
@@ -55,6 +59,11 @@
     {
       "source": "/veteransbenefits.html",
       "destination": "/veteransbenefits",
+      "permanent": true
+    },
+    {
+      "source": "/benefitsforveterans.html",
+      "destination": "/benefitsforveterans",
       "permanent": true
     }
   ]
