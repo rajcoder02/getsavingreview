@@ -20,6 +20,10 @@
     {
       "source": "/gutter",
       "destination": "/gutter.html"
+    },
+    {
+      "source": "/debtrelief",
+      "destination": "/debtrelief.html"
     }
   ],
   "redirects": [
@@ -46,6 +50,11 @@
     {
       "source": "/gutter.html",
       "destination": "/gutter",
+      "permanent": true
+    },
+    {
+      "source": "/debtrelief.html",
+      "destination": "/debtrelief",
       "permanent": true
     }
   ]
