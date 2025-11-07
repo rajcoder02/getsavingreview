@@ -22,7 +22,7 @@
       "destination": "/gutter.html"
     },
     {
-      "source": "/debtrelief",
+      "source": "/veteransbenefits",
       "destination": "/debtrelief.html"
     }
   ],
@@ -54,7 +54,7 @@
     },
     {
       "source": "/debtrelief.html",
-      "destination": "/debtrelief",
+      "destination": "/veteransbenefits",
       "permanent": true
     }
   ]
