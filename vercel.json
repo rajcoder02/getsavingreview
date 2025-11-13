@@ -28,6 +28,10 @@
     {
       "source": "/benefitsforveterans",
       "destination": "/benefitsforveterans.html"
+    },
+    {
+      "source": "/autowarranty",
+      "destination": "/autowarranty.html"
     }
   ],
   "redirects": [
@@ -64,6 +68,11 @@
     {
       "source": "/benefitsforveterans.html",
       "destination": "/benefitsforveterans",
+      "permanent": true
+    },
+    {
+      "source": "/autowarranty.html",
+      "destination": "/autowarranty",
       "permanent": true
     }
   ]

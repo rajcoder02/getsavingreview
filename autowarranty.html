@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Insurance Protection - Get Covered Today</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #065c83;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 3vw, 22px);
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            font-size: 16px;
+        }
+
+        .hero-features span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #0ea5e9;
+            padding: 18px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.6s ease-in;
+            width: 50%;
+            font-weight: bolder;
+            font-size: 25px;
+        }
+
+        .cta-button:hover {
+            background: #f0f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image {
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 60px;
+            color: #0ea5e9;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            padding: 10px;
+            background: #f0f9ff;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            background: #065c83;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .benefit-text {
+            font-size: 18px;
+            color: #2d3748;
+            font-weight: bolder;
+        }
+
+        .benefits-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .benefits .cta-button {
+            background: #065c83;
+            color: white;
+        }
+
+        .benefits .cta-button:hover {
+            background: #0284c7;
+        }
+
+        /* Urgency Section */
+        .urgency {
+            padding: 80px 20px;
+            background: #065c83;
+            color: white;
+            text-align: center;
+        }
+
+        .urgency-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .urgency h2 {
+            font-size: clamp(24px, 4vw, 36px);
+            margin-bottom: 20px;
+        }
+
+        .urgency p {
+            font-size: clamp(16px, 3vw, 20px);
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .stats {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        .cta-button {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Footer */
+        footer {
+            background: #f0f9ff;
+            color: #2d3748;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #38bdf8;
+        }
+
+        footer p {
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero-features {
+                /* flex-direction: column; */
+                gap: 15px;
+            }
+
+            .benefits,
+            .urgency {
+                padding: 60px 20px;
+            }
+
+            .benefits-grid {
+                gap: 30px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>!function () { "use strict"; var n = "lp_ref", t = "cpid", e = "lpurl", c = "https://webeasyhit.com", r = "(?<domain>http(?:s?)://[^/])".concat("/cf/click"), a = "(?:(?:/(?<cta>[1-9][0-9])/?)|(?:/))?", i = "^".concat(r).concat(a).concat("(?:$|(\\?.))"), o = 'javascript:window.clickflare.l="(?<original_link>'.concat(r).concat(a, '("|(\\?[^"]"))).*'), s = function () { return new RegExp(i, "") }, u = function () { return new RegExp(o, "") }; function l(n) { var t = function (n) { return n.replace(s(), (function (n) { for (var t = [], e = 1; e < arguments.length; e++)t[e - 1] = arguments[e]; var r = t[t.length - 1].domain; return n.replace(r, c) })) }(n); return 'javascript:window.clickflare.l="'.concat(t, '"; void 0;') } function f(n, t) { if (t && n && t.apply(document, [n]), /loaded|interactive|complete/.test(document.readyState)) for (var e = 0, c = document.links.length; e < c; e++)if (s().test(document.links[e].href)) { var r = document.links[e]; window.clickflare.links_replaced.has(r) || (r.href = l(r.href), window.clickflare.links_replaced.add(r)) } } var d, h, m, p; !function (r, a) { var i = document.onreadystatechange; window.clickflare || (window.clickflare = { listeners: {}, customParams: {}, links_replaced: new Set, addEventListener: function (n, t) { var e = this.listeners[n] || []; e.includes(t) || e.push(t), this.listeners[n] = e }, dispatchEvent: function (n, t) { t && (this.customParams[n] = t), (this.listeners[n] || []).forEach((function (n) { return n(t) })) }, push: function (n, t) { t && (this.customParams[n] = t), (this.listeners[n] || []).forEach((function (n) { return n(t) })) } }, document.onreadystatechange = function (n) { return f(n, i) }, f(null, i), setTimeout((function () { !function (r, a) { var i, o = function (r, a) { var i = new URL("".concat(c).concat(r)), o = "{", s = o + o; a.startsWith(s) || i.searchParams.set(t, a); return i.searchParams.append(n, document.referrer), i.searchParams.append(e, location.href), i.searchParams.append("lpt", document.title), i.searchParams.append("t", (new Date).getTime().toString()), i.toString() }(r, a), s = document.createElement("script"), l = document.scripts[0]; s.async = 1, s.src = o, s.onerror = function () { !function () { for (var n = function (n, t) { var e = document.links[n]; u().test(e.href) && setTimeout((function () { e && e.setAttribute("href", function (n) { var t = n.match(u()); if (t) { var e = (t.groups || {}).original_link; return e ? e.slice(0, -1) : n } return n }(e.href)) })) }, t = 0, e = document.links.length; t < e; t++)n(t) }() }, null === (i = l.parentNode) || void 0 === i || i.insertBefore(s, l) }(r, a) }))) }("".concat("/cf/tags", "/").concat(new URL(window.location.href).searchParams.get("cftmid") || "{{_CONTAINER_ID}}"), (m = new URL(window.location.href).searchParams.get(t), d = new RegExp("(^| )".concat("cf_cpid", "=([^;]+)")), p = (h = document.cookie.match(d)) && h.pop() || null, m || p || "{{CAMPAIGN_ID_}}")) }();</script>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Factory Warranty May Have Expired — Don't Pay for Repairs Yourself!</h1>
+            <p>Check if your vehicle still qualifies for comprehensive auto insurance protection.</p>
+
+            <div class="hero-features">
+                <span>⚡ Fast</span>
+                <span>🔒 Secure</span>
+                <span>✨ No personal info required</span>
+            </div>
+
+            <a href="https://webeasyhit.com/cf/click/1" class="cta-button" id="cta1">Check My Eligibility Now</a>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=500&fit=crop"
+                    alt="Happy driver with car">
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2>Why Thousands of Drivers Choose Our Insurance</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">Covers engine, transmission, and electrical repairs</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">Nationwide service centers</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">Cancel anytime — no long-term contracts</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">Affordable monthly plans</div>
+                </div>
+            </div>
+
+            <div class="benefits-cta">
+                <a href="https://webeasyhit.com/cf/click/1" class="cta-button" id="cta2">Get My Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Urgency Section -->
+    <section class="urgency">
+        <div class="container">
+            <div class="urgency-content">
+                <div class="stats">2.4 Million+</div>
+                <h2>Drivers Already Checked Their Eligibility This Year</h2>
+                <p>Don't miss out — coverage options may expire soon.</p>
+                <a href="https://webeasyhit.com/cf/click/1 " class="cta-button" id="cta3">Check My Vehicle Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>
+                © 2025 Get Saving Review. All rights reserved.<br>
+                This site is not affiliated with any car manufacturer. Coverage options vary by state.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Add your redirect URL here
+        const OFFER_URL = "https://webeasyhit.com/cf/click/1";
+
+        // Handle all CTA button clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Redirect to your offer URL
+                window.location.href = OFFER_URL;
+            });
+        });
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Add entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease-in';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.benefit-item, .urgency-content').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
